@@ -31,3 +31,15 @@ a {
       color: white;
       margin: 10px;
 }
+
+.cart-link {
+      background-color: brown;
+      position: relative;
+      padding: 5px;
+      border-radius: 15px;
+}
+.cart-items-count {
+      position: absolute;
+      right: 0;
+      top: -25%;
+}
