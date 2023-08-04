@@ -1,0 +1,25 @@
+.main {
+      display: flex;
+      justify-content: center;
+}
+
+.my-account {
+      border-radius: 10px;
+      background-color: bisque;
+      padding: 10px;
+      margin: 10px;
+}
+
+.options {
+      display: flex;
+      justify-content: space-around;
+}
+
+.option {
+      margin: 5px;
+      margin-top: 3px;
+      font-weight: bold;
+      color: #ad5502;
+      font-size: 1.25rem;
+      height: fit-content;
+}

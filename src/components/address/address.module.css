@@ -1,0 +1,35 @@
+.address {
+      display: flex;
+      flex-direction: column;
+      border-bottom: 2px solid rgb(219, 112, 19);
+      margin: 5px;
+      padding: 5px;
+}
+
+i {
+      margin: 5px;
+}
+
+.navigation {
+      display: flex;
+}
+
+.edit-address-button,
+.delete-address-button {
+      color: white;
+      padding-left: 25px;
+      padding-right: 25px;
+      margin: 5px;
+      font-size: 16px;
+      height: 26px;
+      border-radius: 38px;
+      text-align: center;
+}
+
+.delete-address-button {
+      background-color: red;
+}
+.edit-address-button {
+      background-color: blue;
+      text-decoration: none;
+}

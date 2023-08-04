@@ -1,147 +1,87 @@
-import { Fragment, useEffect } from "react";
-import classes from "./homPage.module.css";
-import laptop from "../../assests/laptop.jpg";
-import cartContext from "../../context/cart";
-import { useContext, useState } from "react";
-import { useOutletContext } from "react-router-dom";
-
-export default function HomePage() {
-      const cartContextValue = useContext(cartContext);
-      const [setCartItemsCount] = useOutletContext();
-      const addToCartHandler = (product) => {
-            cartContextValue.items.push(product);
-            setCartItemsCount(cartContextValue.items.length);
-      };
-      const [productsData, setProductsData] = useState([]);
-
-      useEffect(() => {
-            const getProductsData = async () => {
-                  const response = await fetch("http://localhost:3000");
-                  const data = await response.json();
-                  setProductsData(data);
-                  console.log(data);
-            };
-            getProductsData();
-      }, []);
-
+import styles from "./homePage.module.css";
+import homeImage from "../../assests/homeImage.jpg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+      faTruck,
+      faPhone,
+      faCreditCard,
+} from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+const HomePage = () => {
       return (
-            <Fragment>
-                  <main className={classes.main}>
-                        <section className={classes["filtering-section"]}>
-                              <div className={classes["filtering-type"]}>
-                                    <h3>CATEGORIES</h3>
-                                    <div>Mobiles</div>
-                                    <div>Laptops</div>
-                                    <div>Monitors</div>
+            <main className={styles.main}>
+                  <section className={styles["headline-section"]}>
+                        <h1 className={styles.headline}>
+                              <i>
+                                    Welcome to electroKart, experinece never
+                                    done before shopping{" "}
+                              </i>
+                        </h1>
+                        <Link
+                              to={"/products"}
+                              className={styles["products-link"]}
+                        >
+                              <i>Explore Products</i>
+                        </Link>
+                  </section>
+                  <section className={styles.advantages}>
+                        <h1>Why us</h1>
+                        <div>
+                              <div className={styles.advantage}>
+                                    <FontAwesomeIcon icon={faTruck} />
+                                    Express Delivery
                               </div>
-
-                              <div className={classes["filtering-type"]}>
-                                    <h3>Brand</h3>
-                                    <div>Asus</div>
-                                    <div>Msi</div>
-                                    <div>Dell</div>
-                                    <div>Acer</div>
-                                    <div>Razer</div>
+                              <div className={styles.advantage}>
+                                    <FontAwesomeIcon icon={faPhone} />
+                                    24/7 customer support
                               </div>
-                              <div className={classes["filtering-type"]}>
-                                    <h3>PRICE</h3>
-                                    <div>upto 25000</div>
-                                    <div>upto 50000</div>
-                                    <div>upto 70000</div>
+                              <div className={styles.advantage}>
+                                    <FontAwesomeIcon icon={faCreditCard} />
+                                    Refund policy
                               </div>
-                              <div className={classes["filtering-type"]}>
-                                    <h3>CPU</h3>
-                                    <div>Amd</div>
-                                    <div>Intel</div>
+                        </div>
+                        <div>
+                              <div className={styles.advantage}>
+                                    <FontAwesomeIcon icon={faTruck} />
+                                    Express Delivery
                               </div>
-                        </section>
-                        <section className={classes["products-section"]}>
-                              <h1>Featured Products</h1>
-                              <cartContext.Provider>
-                                    {productsData.map((product) => {
-                                          return (
-                                                <div
-                                                      className={
-                                                            classes.product
-                                                      }
-                                                >
-                                                      <div>
-                                                            <img
-                                                                  src={laptop}
-                                                                  className={
-                                                                        classes[
-                                                                              "product-image"
-                                                                        ]
-                                                                  }
-                                                            ></img>
-                                                            <h3
-                                                                  className={
-                                                                        classes[
-                                                                              "product-name"
-                                                                        ]
-                                                                  }
-                                                            >
-                                                                  {product.name}
-                                                            </h3>
-
-                                                            <div
-                                                                  className={
-                                                                        classes[
-                                                                              "product-description"
-                                                                        ]
-                                                                  }
-                                                            >
-                                                                  intel core i7
-                                                            </div>
-                                                            <div
-                                                                  className={
-                                                                        classes[
-                                                                              "product-price"
-                                                                        ]
-                                                                  }
-                                                            >
-                                                                  $1007
-                                                            </div>
-                                                      </div>
-                                                      <div>
-                                                            <div>
-                                                                  {product.cpu}
-                                                            </div>
-                                                            <div>
-                                                                  {product.ram}
-                                                            </div>
-                                                            <div>
-                                                                  240hz refresh
-                                                                  rate
-                                                            </div>
-                                                            <div>
-                                                                  {
-                                                                        product.storage
-                                                                  }
-                                                            </div>
-                                                      </div>
-                                                      <div>
-                                                            <button
-                                                                  className={
-                                                                        classes[
-                                                                              "add-to-cart-button"
-                                                                        ]
-                                                                  }
-                                                                  onClick={() => {
-                                                                        addToCartHandler(
-                                                                              product
-                                                                        );
-                                                                  }}
-                                                            >
-                                                                  + Add
-                                                            </button>
-                                                      </div>
-                                                </div>
-                                          );
-                                    })}
-                              </cartContext.Provider>
-                        </section>
-                  </main>
-            </Fragment>
+                              <div className={styles.advantage}>
+                                    <FontAwesomeIcon icon={faPhone} />
+                                    24/7 customer support
+                              </div>
+                              <div className={styles.advantage}>
+                                    <FontAwesomeIcon icon={faCreditCard} />
+                                    Refund policy
+                              </div>
+                        </div>
+                  </section>
+                  <footer className={styles.footer}>
+                        <div className={styles.type}>
+                              <h2 className={styles["type-heading"]}>
+                                    Quick links
+                              </h2>
+                              <Link className={styles["quick-link"]}>Home</Link>
+                              <Link className={styles["quick-link"]}>Cart</Link>
+                              <Link className={styles["quick-link"]}>
+                                    Products
+                              </Link>
+                              <Link className={styles["quick-link"]}>
+                                    Profile
+                              </Link>
+                        </div>
+                        <div className={styles.type}>
+                              <h2 className={styles["type-heading"]}>
+                                    contact us
+                              </h2>
+                              <div>
+                                    road no 3, venkateshwara colony<br></br>
+                                    hyderabad<br></br>
+                                    040-99999999
+                              </div>
+                        </div>
+                  </footer>
+            </main>
       );
-}
+};
+
+export default HomePage;

@@ -1,0 +1,13 @@
+.addresses {
+      display: flex;
+      flex-direction: column;
+}
+
+.add-address-button {
+      background-color: green;
+      padding: 5px;
+      border-radius: 5px;
+      color: white;
+      margin: 5px;
+      text-align: center;
+}

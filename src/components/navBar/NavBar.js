@@ -1,29 +1,41 @@
 import classes from "./NavBar.module.css";
-import { Link, Outlet } from "react-router-dom";
-import cartContext from "../../context/cart";
-import { useContext, useState } from "react";
+import { Link, Outlet, useLoaderData, useSubmit, Form } from "react-router-dom";
+import { useEffect, useRef, useState, forwardRef } from "react";
 
-export default function NavBar(props) {
-      const cartContextValue = useContext(cartContext);
-      const [cartItemsCount, setCartItemsCount] = useState(
-            cartContextValue.items.length
-      );
+export default forwardRef(function NavBar(props, ref) {
+      const submit = useSubmit();
+
+      const cartProductsCount = useLoaderData().cartProductsCount;
+
+      const inputChangeHandler = (event) => {
+            submit(event.currentTarget);
+      };
 
       return (
             <>
                   <nav className={classes["nav-bar"]}>
-                        <div class={classes.logo}>ELECTRO</div>
+                        <h1 class={classes.logo}>ELECTRO</h1>
 
-                        <input
-                              className={classes["search-bar"]}
-                              placeholder="search products"
-                        ></input>
+                        <Form action="/products" onChange={inputChangeHandler}>
+                              <input
+                                    ref={ref}
+                                    className={classes["search-bar"]}
+                                    placeholder="search products"
+                                    name="search"
+                              ></input>
+                        </Form>
 
                         <div>
-                              <Link to={"/"}>Home</Link>
+                              <Link to={"/"} className={classes["nav-link"]}>
+                                    HOME
+                              </Link>
                               <Link
-                                    className={classes["cart-link"]}
-                                    to={"/cart"}
+                                    className={
+                                          classes["cart-link"] +
+                                          " " +
+                                          classes["nav-link"]
+                                    }
+                                    to={"/account/cart"}
                               >
                                     CART{" "}
                                     <span
@@ -31,15 +43,27 @@ export default function NavBar(props) {
                                                 classes["cart-items-count"]
                                           }
                                     >
-                                          {cartItemsCount}
+                                          {cartProductsCount}
                                     </span>
                               </Link>
-                              <a href="/stats" class="nav-link">
+                              <Link
+                                    to="/account"
+                                    className={classes["nav-link"]}
+                              >
                                     PROFILE
-                              </a>
+                              </Link>
                         </div>
                   </nav>
-                  <Outlet context={[setCartItemsCount]}></Outlet>
+                  <Outlet></Outlet>
             </>
       );
-}
+});
+
+export const CartProductsCountLoader = async () => {
+      const response = await fetch("http://localhost:3000/account/cart");
+      const data = await response.json();
+      const cartProductsCount = data.reduce((total, element) => {
+            return total + element.quantity;
+      }, 0);
+      return { cartProductsCount };
+};

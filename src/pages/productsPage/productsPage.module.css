@@ -1,26 +1,36 @@
 .main {
-      display: flex;
+      display: block;
+      font-style: italic;
 }
 
 .filtering-section {
-      width: 300px;
-      background-color: rgb(204, 201, 201);
       margin: 10px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      max-height: fit-content;
 }
 
-.filtering-type {
-      margin: 10px;
+.filtering-form {
+      display: flex;
+      justify-content: space-between;
+}
+
+select {
+      font-style: italic;
+      font-weight: bold;
+      font-size: 15px;
+      background-color: white;
+      padding-left: 16px;
+      padding-right: 16px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      border-radius: 20px;
+      color: black;
+      margin: 5px;
+      border: 1px solid black;
 }
 
 .products-section {
       flex-grow: 1;
       text-align: center;
       margin: 10px;
-      background-color: rgb(204, 201, 201);
       background-color: white;
       padding: 10px;
       min-height: 100vh;

@@ -1,0 +1,12 @@
+.option {
+      display: flex;
+      flex-direction: column;
+}
+
+.order {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px;
+      border-bottom: 2px solid rgb(219, 112, 19);
+      color: black;
+}
