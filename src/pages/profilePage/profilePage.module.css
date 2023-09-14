@@ -1,0 +1,27 @@
+.option-data {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding: 10px;
+      align-items: center;
+}
+
+.label {
+      margin-right: 5px;
+      font-weight: bold;
+}
+
+.user-detail {
+      margin: 5px;
+}
+
+.logout-button {
+      color: white;
+      margin: 5px;
+      font-size: 15px;
+      height: 25px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 80px;
+      background-color: red;
+}

@@ -1,12 +1,20 @@
+import { useState } from "react";
+import { useAsyncValue } from "react-router-dom";
 import styles from "./orderSummaryPage.module.css";
 import OrderSummary from "./OrderSummary";
 import Address from "../../components/address/Address";
-import { useLoaderData, Link, Form } from "react-router-dom";
+import { AddressOverLay } from "../../components/address/addressOverlay";
+
 const OrderSummaryPage = () => {
-      const cartProductsData = useLoaderData().response;
-      const addressHistory = useLoaderData().responeOne;
+      const loaderData = useAsyncValue();
+
+      const cartProductsData = useAsyncValue().loaderOneData.payload;
+      const addressHistory = useAsyncValue().loaderTwoData.payload;
       const addressesData = addressHistory.addresses;
-      console.log(addressHistory);
+      const [showAddressOverlay, setShowAddressOverlay] = useState(false);
+      const addAddressButtonClickHandler = () => {
+            setShowAddressOverlay(true);
+      };
       return (
             <>
                   <main className={styles.main}>
@@ -19,7 +27,6 @@ const OrderSummaryPage = () => {
                               {addressesData.map((address) => {
                                     return (
                                           <>
-                                                <Form></Form>
                                                 <input
                                                       type="radio"
                                                       name="address"
@@ -29,12 +36,12 @@ const OrderSummaryPage = () => {
                                                                   "address-radio"
                                                             ]
                                                       }
-                                                      defaultChecked={
-                                                            addressHistory.selectedAddress ==
-                                                            address._id
-                                                                  ? true
-                                                                  : false
-                                                      }
+                                                      //   defaultChecked={
+                                                      //         addressHistory.selectedAddress ==
+                                                      //         address._id
+                                                      //               ? true
+                                                      //               : false
+                                                      //   }
                                                 ></input>
                                                 <Address
                                                       address={address}
@@ -42,31 +49,34 @@ const OrderSummaryPage = () => {
                                           </>
                                     );
                               })}
-                              <Link
+                              <button
                                     className={styles["add-address-button"]}
-                                    to="/account/addresses/new"
+                                    onClick={addAddressButtonClickHandler}
                               >
                                     Add Address
-                              </Link>
+                              </button>
                         </section>
                         <section className={styles["order-summary-section"]}>
                               <OrderSummary
                                     cartProductsData={cartProductsData}
                               ></OrderSummary>
                         </section>
+                        {showAddressOverlay ? (
+                              <AddressOverLay
+                                    setShowAddressOverlay={
+                                          setShowAddressOverlay
+                                    }
+                                    method="POST"
+                                    action="/account/addresses?type=add+address"
+                                    addressData={{}}
+                                    buttonText="Save Address"
+                              ></AddressOverLay>
+                        ) : (
+                              ""
+                        )}
                   </main>
             </>
       );
 };
 
-export const OrderSummaryLoader = async () => {
-      const response = await fetch("http://localhost:3000/account/cart");
-      const responseOne = await fetch(
-            "http://localhost:3000/account/addresses"
-      );
-      const data = {};
-      data.response = await response.json();
-      data.responeOne = await responseOne.json();
-      return data;
-};
 export default OrderSummaryPage;

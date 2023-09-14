@@ -1,6 +1,7 @@
 import styles from "../cartPage/CartPage.module.css";
 import laptop from "../../assests/laptop.jpg";
 import { Form } from "react-router-dom";
+import { ButtonWithActionAndLoader } from "../../components/buttons/buttonWithActionAndLoader";
 const CartProduct = ({ cartProduct }) => {
       return (
             <div className={styles.product}>
@@ -35,25 +36,28 @@ const CartProduct = ({ cartProduct }) => {
                         <div className={styles["product-quantity"]}>
                               <i>X {cartProduct.quantity}</i>
                         </div>
-                        <Form
-                              method="post"
-                              action={`/account/cart/${cartProduct.product._id}?type=remove+from+cart`}
-                        >
-                              <button
-                                    type="submit"
-                                    className={styles["add-to-cart-button"]}
-                              >
-                                    -
-                              </button>
-                        </Form>
-                        <Form
-                              method="post"
-                              action={`/account/cart/${cartProduct.product._id}?type=add+to+cart`}
-                        >
-                              <button className={styles["add-to-cart-button"]}>
-                                    +
-                              </button>
-                        </Form>
+                        <div className={styles["cart-product-action-buttons"]}>
+                              <ButtonWithActionAndLoader
+                                    method="DELETE"
+                                    action={`/account/cart/${cartProduct.product._id}?type=remove+from+cart`}
+                                    buttonClass={
+                                          styles["remove-from-cart-button"]
+                                    }
+                                    buttonText="-"
+                                    loaderHeight="20"
+                                    loaderWidth="50"
+                                    formClass={styles["remove-from-cart-form"]}
+                              ></ButtonWithActionAndLoader>
+                              <ButtonWithActionAndLoader
+                                    method="POST"
+                                    action={`/account/cart/${cartProduct.product._id}?type=add+to+cart`}
+                                    buttonClass={styles["add-to-cart-button"]}
+                                    buttonText="+"
+                                    loaderHeight="20"
+                                    loaderWidth="50"
+                                    formClass={styles["add-to-cart-form"]}
+                              ></ButtonWithActionAndLoader>
+                        </div>
                   </div>
             </div>
       );

@@ -9,7 +9,7 @@ const EditAddressPage = () => {
             <main>
                   <Form
                         method="POST"
-                        action={`/account/addresses/${addressData._id}`}
+                        action={`/account/addresses/${addressData._id}?type=edit+address`}
                   >
                         <div className={styles["address-details"]}>
                               <input

@@ -5,6 +5,7 @@ import {
       faTruck,
       faPhone,
       faCreditCard,
+      faMoneyBill1Wave,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 const HomePage = () => {
@@ -25,8 +26,8 @@ const HomePage = () => {
                         </Link>
                   </section>
                   <section className={styles.advantages}>
-                        <h1>Why us</h1>
                         <div>
+                              <h1>Why us</h1>
                               <div className={styles.advantage}>
                                     <FontAwesomeIcon icon={faTruck} />
                                     Express Delivery
@@ -40,18 +41,20 @@ const HomePage = () => {
                                     Refund policy
                               </div>
                         </div>
+
                         <div>
+                              <h1>Payments accepted</h1>
                               <div className={styles.advantage}>
-                                    <FontAwesomeIcon icon={faTruck} />
-                                    Express Delivery
-                              </div>
-                              <div className={styles.advantage}>
-                                    <FontAwesomeIcon icon={faPhone} />
-                                    24/7 customer support
+                                    <FontAwesomeIcon icon={faCreditCard} />
+                                    Credit card
                               </div>
                               <div className={styles.advantage}>
                                     <FontAwesomeIcon icon={faCreditCard} />
-                                    Refund policy
+                                    Debit card
+                              </div>
+                              <div className={styles.advantage}>
+                                    <FontAwesomeIcon icon={faMoneyBill1Wave} />
+                                    Cash on delivery
                               </div>
                         </div>
                   </section>
@@ -70,8 +73,38 @@ const HomePage = () => {
                               </Link>
                         </div>
                         <div className={styles.type}>
-                              <h2 className={styles["type-heading"]}>
+                              <h2 className={styles["type-heading"]}>About</h2>
+                              <Link className={styles["quick-link"]}>
                                     contact us
+                              </Link>
+                              <Link className={styles["quick-link"]}>
+                                    About us
+                              </Link>
+                              <Link className={styles["quick-link"]}>
+                                    careers
+                              </Link>
+                              <Link className={styles["quick-link"]}>
+                                    Press
+                              </Link>
+                        </div>
+                        <div className={styles.type}>
+                              <h2 className={styles["type-heading"]}>Social</h2>
+                              <Link className={styles["quick-link"]}>
+                                    Twitter
+                              </Link>
+                              <Link className={styles["quick-link"]}>
+                                    Facebook
+                              </Link>
+                              <Link className={styles["quick-link"]}>
+                                    Instagram
+                              </Link>
+                              <Link className={styles["quick-link"]}>
+                                    LinkedIn
+                              </Link>
+                        </div>
+                        <div className={styles.type}>
+                              <h2 className={styles["type-heading"]}>
+                                    Office Address
                               </h2>
                               <div>
                                     road no 3, venkateshwara colony<br></br>

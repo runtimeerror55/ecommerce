@@ -1,30 +1,47 @@
-import { useEffect, useState } from "react";
-import { Form, Link, useLoaderData } from "react-router-dom";
+import { useState } from "react";
+import { useAsyncValue } from "react-router-dom";
 import styles from "./addressesPage.module.css";
 import Address from "../../components/address/Address";
-const AddressesPage = ({ addressesData }) => {
-      addressesData = useLoaderData().addresses;
-
+import { AddressOverLay } from "../../components/address/addressOverlay";
+const AddressesPage = () => {
+      const loaderData = useAsyncValue();
+      const [showAddressOverlay, setShowAddressOverlay] = useState(false);
+      const addAddressButtonClickHandler = () => {
+            setShowAddressOverlay(true);
+      };
+      console.log(loaderData);
       return (
-            <div className={styles.addresses}>
-                  {addressesData.map((address) => {
-                        return <Address address={address}></Address>;
-                  })}
-                  <Link
-                        className={styles["add-address-button"]}
-                        to="/account/addresses/new"
-                  >
-                        Add Address
-                  </Link>
-            </div>
-      );
-};
+            <>
+                  <div className={styles["option-data"]}>
+                        {loaderData.payload.addresses?.map((address) => {
+                              return (
+                                    <Address
+                                          key={address._id}
+                                          address={address}
+                                    ></Address>
+                              );
+                        })}
+                        <button
+                              className={styles["add-address-button"]}
+                              onClick={addAddressButtonClickHandler}
+                        >
+                              Add Address
+                        </button>
+                  </div>
 
-export const getAddressesDataLoader = async () => {
-      const response = await fetch("http://localhost:3000/account/addresses");
-      const data = await response.json();
-      console.log(data);
-      return data;
+                  {showAddressOverlay ? (
+                        <AddressOverLay
+                              setShowAddressOverlay={setShowAddressOverlay}
+                              method="POST"
+                              action="/account/addresses?type=add+address"
+                              addressData={{}}
+                              buttonText="Save Address"
+                        ></AddressOverLay>
+                  ) : (
+                        ""
+                  )}
+            </>
+      );
 };
 
 export default AddressesPage;

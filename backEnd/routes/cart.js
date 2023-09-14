@@ -3,96 +3,141 @@ const router = express.Router();
 const CartModel = require("../models/cart");
 const CartProductModel = require("../models/cartProduct");
 const ProductModel = require("../models/product");
+const { isLoggedIn } = require("../middleware");
 
-router.route("/account/cart").get(async (request, response) => {
-      const cart = await CartModel.find({}).populate({
-            path: "cartProducts",
-            populate: { path: "product" },
-      });
-      let cartProducts = [];
-      if (cart.length !== 0) {
-            cartProducts = cart[0].cartProducts;
-      }
-
-      response.json(cartProducts);
-});
-
-router.route("/account/cart/:id")
-      .post(async (request, response) => {
-            const cart = await CartModel.find({}).populate({
+router.route("/account/cart").get(isLoggedIn, async (request, response) => {
+      console.log("hello");
+      try {
+            const cart = await CartModel.findOne({
+                  user: request.user._id,
+            }).populate({
                   path: "cartProducts",
                   populate: { path: "product" },
             });
+            let cartProducts = [];
 
-            if (cart.length === 0) {
-                  const newCartProduct = new CartProductModel({
-                        product: request.params.id,
-                        quantity: 1,
-                  });
-                  await newCartProduct.save();
-                  const newCart = new CartModel({
-                        cartProducts: [newCartProduct],
-                  });
-                  await newCart.save();
-            } else {
-                  const cartProduct = cart[0].cartProducts.find(
-                        (cartProduct) => {
-                              return (
-                                    cartProduct.product._id.toString() ===
-                                    request.params.id
-                              );
-                        }
-                  );
+            if (cart) {
+                  cartProducts = cart.cartProducts;
+            }
 
-                  if (cartProduct !== undefined) {
-                        cartProduct.quantity++;
-                        await cartProduct.save();
-                  } else {
+            setTimeout(() => {
+                  response.json({
+                        status: "success",
+                        message: "fetched cart successfully",
+                        payload: cartProducts,
+                  });
+                  console.log(cartProducts);
+            }, 1000);
+      } catch (error) {
+            response
+                  .status(500)
+                  .json({ status: "error", message: error.message });
+      }
+});
+
+router.route("/account/cart/:id")
+      .post(isLoggedIn, async (request, response) => {
+            try {
+                  const cart = await CartModel.findOne({
+                        user: request.user._id,
+                  }).populate({
+                        path: "cartProducts",
+                        populate: { path: "product" },
+                  });
+
+                  if (!cart) {
                         const newCartProduct = new CartProductModel({
                               product: request.params.id,
                               quantity: 1,
                         });
                         await newCartProduct.save();
-                        cart[0].cartProducts.push(newCartProduct);
-                        await cart[0].save();
-                  }
-            }
-
-            response.json("successfully added the product");
-      })
-      .delete(async (request, response) => {
-            const cart = await CartModel.find({}).populate({
-                  path: "cartProducts",
-                  populate: { path: "product" },
-            });
-            const cartProduct = cart[0].cartProducts.find((cartProduct) => {
-                  return (
-                        cartProduct.product._id.toString() === request.params.id
-                  );
-            });
-
-            if (cartProduct !== undefined) {
-                  if (cartProduct.quantity === 1) {
-                        await CartModel.updateMany(
-                              {},
-                              {
-                                    $pull: {
-                                          cartProducts: {
-                                                $in: cartProduct._id,
-                                          },
-                                    },
+                        const newCart = new CartModel({
+                              cartProducts: [newCartProduct],
+                              user: request.user._id,
+                        });
+                        await newCart.save();
+                  } else {
+                        const cartProduct = cart.cartProducts.find(
+                              (cartProduct) => {
+                                    return (
+                                          cartProduct.product._id.toString() ===
+                                          request.params.id
+                                    );
                               }
                         );
-                        await CartProductModel.findByIdAndDelete(
-                              cartProduct._id
-                        );
-                  } else {
-                        cartProduct.quantity--;
-                        await cartProduct.save();
-                  }
-            }
 
-            response.json("successfully added the product");
+                        if (cartProduct !== undefined) {
+                              cartProduct.quantity++;
+                              await cartProduct.save();
+                        } else {
+                              const newCartProduct = new CartProductModel({
+                                    product: request.params.id,
+                                    quantity: 1,
+                              });
+                              await newCartProduct.save();
+                              cart.cartProducts.push(newCartProduct);
+                              await cart.save();
+                        }
+                  }
+                  setTimeout(() => {
+                        response.status(200).json({
+                              status: "success",
+                              message: "added to the cart",
+                        });
+                  }, 1000);
+            } catch (error) {
+                  response
+                        .status(500)
+                        .json({ status: "error", message: error.message });
+            }
+      })
+      .delete(isLoggedIn, async (request, response) => {
+            try {
+                  const cart = await CartModel.findOne({
+                        user: request.user._id,
+                  }).populate({
+                        path: "cartProducts",
+                        populate: { path: "product" },
+                  });
+                  const cartProduct = cart.cartProducts.find((cartProduct) => {
+                        return (
+                              cartProduct.product._id.toString() ===
+                              request.params.id
+                        );
+                  });
+
+                  if (cartProduct !== undefined) {
+                        if (cartProduct.quantity === 1) {
+                              await CartModel.updateMany(
+                                    { user: request.user._id },
+                                    {
+                                          $pull: {
+                                                cartProducts: {
+                                                      $in: cartProduct._id,
+                                                },
+                                          },
+                                    }
+                              );
+                              await CartProductModel.findByIdAndDelete(
+                                    cartProduct._id
+                              );
+                        } else {
+                              cartProduct.quantity--;
+                              await cartProduct.save();
+                        }
+                  }
+
+                  setTimeout(() => {
+                        response.status(200).json({
+                              status: "success",
+                              message: "deleted from cart",
+                        });
+                  }, 1000);
+            } catch (error) {
+                  response
+                        .status(500)
+                        .json({ status: "error", message: error.message });
+            }
       });
 
 module.exports = router;

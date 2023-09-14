@@ -3,38 +3,57 @@ const router = express.Router();
 const ProductModel = require("../models/product");
 
 router.route("/").get(async (request, response) => {
-      const query = Object.entries(request.query);
-      const finalQuery = {};
-      let sort = "";
-      for (let [key, value] of query) {
-            if (key != "sort") {
-                  if (key == "price") {
-                        finalQuery.price = { $lte: value };
+      console.log("one");
+      try {
+            const query = Object.entries(request.query);
+            const finalQuery = {};
+            let sort = "";
+            let search = undefined;
+            for (let [key, value] of query) {
+                  if (key != "sort") {
+                        if (key == "price") {
+                              finalQuery.price = { $lte: value };
+                        } else {
+                              if (key !== "search") {
+                                    finalQuery[key] = value;
+                              } else {
+                                    search = value;
+                              }
+                        }
                   } else {
-                        finalQuery[key] = value;
+                        sort = value;
                   }
-            } else {
-                  sort = value;
             }
-      }
-      console.log(finalQuery);
-      let products = [];
-      if (finalQuery.search !== "" && finalQuery.search !== undefined) {
-            products = await ProductModel.find({
-                  name: {
-                        $regex: new RegExp([...finalQuery.search].join(".*?")),
-                        $options: "i",
-                  },
-            }).sort({
-                  price: sort,
-            });
-      } else {
-            products = await ProductModel.find(finalQuery).sort({
-                  price: sort,
-            });
-      }
+            console.log(finalQuery);
+            let products = [];
+            if (search !== "" && search !== undefined) {
+                  products = await ProductModel.find({
+                        name: {
+                              $regex: new RegExp([...search].join(".*?")),
+                              $options: "i",
+                        },
+                        ...finalQuery,
+                  }).sort({
+                        price: sort,
+                  });
+            } else {
+                  products = await ProductModel.find(finalQuery).sort({
+                        price: sort,
+                  });
+            }
 
-      response.json(products);
+            setTimeout(() => {
+                  response.status(200).json({
+                        status: "success",
+                        message: "fetched successfully",
+                        payload: products,
+                  });
+            }, 1000);
+      } catch (error) {
+            response
+                  .status(500)
+                  .json({ status: "error", message: error.message });
+      }
 });
 
 module.exports = router;

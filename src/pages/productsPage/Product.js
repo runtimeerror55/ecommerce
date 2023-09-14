@@ -1,14 +1,30 @@
-import { Form, redirect } from "react-router-dom";
+import {
+      Form,
+      redirect,
+      useAsyncError,
+      useAsyncValue,
+      useSubmit,
+} from "react-router-dom";
 import classes from "./productsPage.module.css";
-
+import { ButtonWithActionAndLoader } from "../../components/buttons/buttonWithActionAndLoader";
 import laptop from "../../assests/laptop.jpg";
 const Product = ({ product }) => {
+      const { loaderTwoData } = useAsyncValue();
+      const isProductPresentInTheCart = loaderTwoData.payload.some(
+            (cartProduct) => {
+                  return cartProduct.product._id === product._id;
+            }
+      );
+
+      const submit = useSubmit();
+
       return (
             <div className={classes.product}>
                   <div>
                         <img
                               src={laptop}
                               className={classes["product-image"]}
+                              alt={product.name}
                         ></img>
                         <h3 className={classes["product-name"]}>
                               <i>{product.name}</i>
@@ -34,17 +50,25 @@ const Product = ({ product }) => {
                         </div>
                   </div>
                   <div>
-                        <Form
-                              method="POST"
-                              action={`/account/cart/${product._id}?type=add+to+cart`}
-                        >
-                              <button
-                                    type="submit"
-                                    className={classes["add-to-cart-button"]}
-                              >
-                                    + Add
-                              </button>
-                        </Form>
+                        {isProductPresentInTheCart ? (
+                              <ButtonWithActionAndLoader
+                                    method="DELETE"
+                                    action={`/account/cart/${product._id}?type=remove+from+cart`}
+                                    buttonClass={classes["add-to-cart-button"]}
+                                    buttonText="Remove"
+                                    loaderHeight="20"
+                                    loaderWidth="100"
+                              ></ButtonWithActionAndLoader>
+                        ) : (
+                              <ButtonWithActionAndLoader
+                                    method="POST"
+                                    action={`/account/cart/${product._id}?type=add+to+cart`}
+                                    buttonClass={classes["add-to-cart-button"]}
+                                    buttonText="Add"
+                                    loaderHeight="20"
+                                    loaderWidth="100"
+                              ></ButtonWithActionAndLoader>
+                        )}
                   </div>
             </div>
       );

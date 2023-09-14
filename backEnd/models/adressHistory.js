@@ -10,6 +10,10 @@ const addressHistorySchema = mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "addresses",
       },
+      user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "users",
+      },
 });
 
 const AddressHistoryModel = mongoose.model(

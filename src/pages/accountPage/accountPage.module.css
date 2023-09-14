@@ -1,25 +1,36 @@
 .main {
       display: flex;
       justify-content: center;
+      align-items: center;
+      height: 90vh;
 }
 
 .my-account {
       border-radius: 10px;
       background-color: bisque;
-      padding: 10px;
       margin: 10px;
+      display: flex;
+      width: 60vw;
+      height: 70vh;
 }
 
 .options {
       display: flex;
-      justify-content: space-around;
+      flex-direction: column;
+      background-color: brown;
 }
 
 .option {
-      margin: 5px;
-      margin-top: 3px;
+      padding: 5px;
       font-weight: bold;
-      color: #ad5502;
-      font-size: 1.25rem;
-      height: fit-content;
+      color: white;
+}
+.active {
+      background-color: bisque;
+      color: black;
+}
+
+.option:hover {
+      background-color: bisque;
+      color: black;
 }

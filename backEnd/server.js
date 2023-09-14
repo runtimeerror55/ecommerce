@@ -9,6 +9,7 @@ const homeRouter = require("./routes/home");
 const cartRouter = require("./routes/cart");
 const addressRouter = require("./routes/address");
 const orderRouter = require("./routes/order");
+const authenticationRouter = require("./routes/authentication");
 
 app.use(
       cors({
@@ -16,23 +17,6 @@ app.use(
       })
 );
 
-app.use(
-      session({
-            secret: "electro55",
-            resave: false,
-            saveUninitialized: false,
-            cookie: {
-                  httpOnly: true,
-                  expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-                  maxAge: 1000 * 60 * 60 * 24 * 7,
-            },
-      })
-);
-// app.use(passport.initialize());
-// app.use(passport.session());
-// passport.use(new LocalStrategy(UserModel.authenticate()));
-// passport.serializeUser(UserModel.serializeUser());
-// passport.deserializeUser(UserModel.deserializeUser());
 mongoose
       .connect("mongodb://127.0.0.1:27017/ecommerce")
       .then(() => {
@@ -49,6 +33,7 @@ app.listen("3000", () => {
       console.log("listening");
 });
 
+app.use("/", authenticationRouter);
 app.use("/", homeRouter);
 app.use("/", cartRouter);
 app.use("/", addressRouter);

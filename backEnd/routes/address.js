@@ -2,50 +2,138 @@ const express = require("express");
 const router = express.Router();
 const AddressModel = require("../models/address");
 const AddressHistoryModel = require("../models/adressHistory");
+const { isLoggedIn } = require("../middleware");
 
 router.route("/account/addresses")
-      .get(async (request, response) => {
-            const addressHistories = await AddressHistoryModel.find(
-                  {}
-            ).populate("addresses");
-            response.json(addressHistories[0]);
-      })
-      .post(async (request, response) => {
-            const newAddress = new AddressModel(request.body);
-            await newAddress.save();
-            const addressHistories = await AddressHistoryModel.find({});
-            console.log(addressHistories);
-            if (addressHistories.length == 0) {
-                  const newAddressHistory = new AddressHistoryModel({
-                        addresses: [newAddress],
-                        selectedAddress: newAddress,
-                  });
-                  await newAddressHistory.save();
-            } else {
-                  addressHistories[0].addresses.push(newAddress);
-                  await addressHistories[0].save();
-            }
+      .get(isLoggedIn, async (request, response) => {
+            try {
+                  let addressHistory = await AddressHistoryModel.findOne({
+                        user: request.user._id,
+                  }).populate("addresses");
 
-            response.send("successfully Added the address");
+                  if (!addressHistory) {
+                        addressHistory = {};
+                  }
+                  setTimeout(() => {
+                        response.status(200).json({
+                              status: "success",
+                              message: "fetched successfully",
+                              payload: addressHistory,
+                        });
+                  }, 1000);
+            } catch (error) {
+                  response
+                        .status(500)
+                        .json({ status: "error", message: error.message });
+            }
+      })
+      .post(isLoggedIn, async (request, response) => {
+            try {
+                  const newAddress = new AddressModel(request.body);
+
+                  const addressHistory = await AddressHistoryModel.findOne({
+                        user: request.user._id,
+                  });
+
+                  if (!addressHistory) {
+                        const newAddressHistory = new AddressHistoryModel({
+                              addresses: [newAddress],
+                              selectedAddress: newAddress,
+                              user: request.user._id,
+                        });
+                        await newAddress.save();
+                        await newAddressHistory.save();
+                  } else {
+                        addressHistory.addresses.push(newAddress);
+                        await newAddress.save();
+                        await addressHistory.save();
+                  }
+
+                  setTimeout(() => {
+                        response.status(200).json({
+                              status: "success",
+                              message: "added the address",
+                        });
+                  }, 1000);
+                  console.log(request.body);
+            } catch (error) {
+                  response
+                        .status(500)
+                        .json({ status: "error", message: error.message });
+            }
       });
 
 router.route("/account/addresses/:id")
-      .delete(async (request, response) => {
-            await AddressModel.findByIdAndDelete(request.params.id);
-            response.send("succesfully deleted");
+      .delete(isLoggedIn, async (request, response) => {
+            try {
+                  const addressHistory = await AddressHistoryModel.findOne({
+                        user: request.user._id,
+                  });
+                  const isAddressPresent = addressHistory.addresses.some(
+                        (address) => {
+                              return address.toString() === request.params.id;
+                        }
+                  );
+                  if (!isAddressPresent) {
+                        throw new Error("unauthorized action");
+                  }
+                  await AddressModel.findByIdAndDelete(request.params.id);
+                  await AddressHistoryModel.updateOne(
+                        { user: request.user._id },
+                        {
+                              $pull: {
+                                    addresses: {
+                                          $in: request.params.id,
+                                    },
+                              },
+                        }
+                  );
+
+                  setTimeout(() => {
+                        response.status(200).json({
+                              status: "success",
+                              message: "deleted the address",
+                        });
+                  }, 1000);
+            } catch (error) {
+                  response
+                        .status(500)
+                        .json({ status: "error", message: error.message });
+            }
       })
-      .put(async (request, response) => {
-            console.log(request.body);
-            await AddressModel.findByIdAndUpdate(
-                  request.params.id,
-                  request.body
-            );
-            response.send("succesfully edited");
+      .put(isLoggedIn, async (request, response) => {
+            try {
+                  const addressHistory = await AddressHistoryModel.findOne({
+                        user: request.user._id,
+                  });
+                  const isAddressPresent = addressHistory.addresses.some(
+                        (address) => {
+                              return address.toString() === request.params.id;
+                        }
+                  );
+                  if (!isAddressPresent) {
+                        throw new Error("unauthorized action");
+                  }
+                  await AddressModel.findByIdAndUpdate(
+                        request.params.id,
+                        request.body
+                  );
+                  setTimeout(() => {
+                        response.status(200).json({
+                              status: "success",
+                              message: "edited the address",
+                        });
+                  }, 1000);
+            } catch (error) {
+                  response
+                        .status(500)
+                        .json({ status: "error", message: error.message });
+            }
       });
 
-router.route("/account/addresses/:id/edit").get(async (request, response) => {
-      const address = await AddressModel.findById(request.params.id);
-      response.json(address);
-});
+// router.route("/account/addresses/:id/edit").get(async (request, response) => {
+//       const address = await AddressModel.findById(request.params.id);
+//       response.json(address);
+// });
 
 module.exports = router;

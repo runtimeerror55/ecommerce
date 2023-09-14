@@ -1,3 +1,9 @@
+.loader {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 90vh;
+}
 .main {
       display: block;
       font-style: italic;
@@ -66,12 +72,12 @@ select {
 }
 .add-to-cart-button {
       font-weight: bold;
-      font-size: 20px;
+      font-size: 15px;
       background-color: #8a2b06;
-      padding-left: 32px;
-      padding-right: 32px;
-      padding-top: 5px;
-      padding-bottom: 5px;
+      width: 100px;
+      height: 30px;
+
       border-radius: 20px;
       color: white;
+      cursor: pointer;
 }

@@ -17,13 +17,13 @@ i {
 .edit-address-button,
 .delete-address-button {
       color: white;
-      padding-left: 25px;
-      padding-right: 25px;
       margin: 5px;
-      font-size: 16px;
-      height: 26px;
-      border-radius: 38px;
+      font-size: 15px;
+      height: 25px;
+      border-radius: 5px;
       text-align: center;
+      cursor: pointer;
+      width: 80px;
 }
 
 .delete-address-button {

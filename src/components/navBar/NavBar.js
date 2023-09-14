@@ -1,33 +1,36 @@
 import classes from "./NavBar.module.css";
 import { Link, Outlet, useLoaderData, useSubmit, Form } from "react-router-dom";
-import { useEffect, useRef, useState, forwardRef } from "react";
+import { useEffect, useRef, useState, forwardRef, useContext } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+      faCartShopping,
+      faUser,
+      faHouse,
+} from "@fortawesome/free-solid-svg-icons";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { authContext } from "../../context/authentication";
 
 export default forwardRef(function NavBar(props, ref) {
-      const submit = useSubmit();
-
-      const cartProductsCount = useLoaderData().cartProductsCount;
-
-      const inputChangeHandler = (event) => {
-            submit(event.currentTarget);
-      };
-
+      const { token } = useContext(authContext);
       return (
             <>
                   <nav className={classes["nav-bar"]}>
                         <h1 class={classes.logo}>ELECTRO</h1>
 
-                        <Form action="/products" onChange={inputChangeHandler}>
-                              <input
-                                    ref={ref}
-                                    className={classes["search-bar"]}
-                                    placeholder="search products"
-                                    name="search"
-                              ></input>
-                        </Form>
+                        <input
+                              ref={ref}
+                              className={classes["search-bar"]}
+                              placeholder="search products"
+                              name="search"
+                        ></input>
 
                         <div>
-                              <Link to={"/"} className={classes["nav-link"]}>
-                                    HOME
+                              <Link
+                                    to={"/products"}
+                                    className={classes["nav-link"]}
+                              >
+                                    <FontAwesomeIcon icon={faHouse} />
                               </Link>
                               <Link
                                     className={
@@ -37,23 +40,41 @@ export default forwardRef(function NavBar(props, ref) {
                                     }
                                     to={"/account/cart"}
                               >
-                                    CART{" "}
+                                    <FontAwesomeIcon icon={faCartShopping} />
                                     <span
                                           className={
                                                 classes["cart-items-count"]
                                           }
                                     >
-                                          {cartProductsCount}
+                                          {0}
                                     </span>
                               </Link>
-                              <Link
-                                    to="/account"
-                                    className={classes["nav-link"]}
-                              >
-                                    PROFILE
-                              </Link>
+                              {token ? (
+                                    <Link
+                                          to="/account/profile"
+                                          className={classes["nav-link"]}
+                                    >
+                                          <FontAwesomeIcon icon={faUser} />
+                                    </Link>
+                              ) : (
+                                    <>
+                                          <Link
+                                                to="/login"
+                                                className={classes["nav-link"]}
+                                          >
+                                                Login
+                                          </Link>
+                                          <Link
+                                                to="/register"
+                                                className={classes["nav-link"]}
+                                          >
+                                                Register
+                                          </Link>
+                                    </>
+                              )}
                         </div>
                   </nav>
+                  <ToastContainer></ToastContainer>
                   <Outlet></Outlet>
             </>
       );
@@ -62,8 +83,9 @@ export default forwardRef(function NavBar(props, ref) {
 export const CartProductsCountLoader = async () => {
       const response = await fetch("http://localhost:3000/account/cart");
       const data = await response.json();
-      const cartProductsCount = data.reduce((total, element) => {
+      const cartProductsCount = data.payload.reduce((total, element) => {
             return total + element.quantity;
       }, 0);
+      console.log("cart product count loader");
       return { cartProductsCount };
 };

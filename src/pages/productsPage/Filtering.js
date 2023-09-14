@@ -1,25 +1,9 @@
-import { Form, useSubmit } from "react-router-dom";
 import { forwardRef } from "react";
 import classes from "./productsPage.module.css";
 const Filtering = forwardRef((props, ref) => {
-      const submit = useSubmit();
-      let filters = { category: "", brand: "", price: "", cpu: "" };
-      const filterChangeHandler = (event) => {
-            filters[event.target.name] = event.target.value;
-            let queryString = "?";
-            for (let [key, value] of Object.entries(filters)) {
-                  if (value !== "") {
-                        queryString += key + "=" + value + "&";
-                  }
-            }
-            submit(queryString);
-      };
       return (
             <section className={classes["filtering-section"]}>
-                  <Form
-                        className={classes["filtering-form"]}
-                        onChange={filterChangeHandler}
-                  >
+                  <div className={classes["filtering-form"]}>
                         <div>
                               <select name="category">
                                     <option value="" disabled selected>
@@ -58,7 +42,6 @@ const Filtering = forwardRef((props, ref) => {
                                     <option value="Intel">Intel</option>
                               </select>
                         </div>
-
                         <div>
                               <select name="sort">
                                     <option value="" disabled selected>
@@ -71,7 +54,7 @@ const Filtering = forwardRef((props, ref) => {
                                     </option>
                               </select>
                         </div>
-                  </Form>
+                  </div>
             </section>
       );
 });
