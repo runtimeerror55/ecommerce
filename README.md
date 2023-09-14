@@ -23,13 +23,13 @@
 
 ## functionalities
 
-1. add to cart
-2. delete from cart
+1. add product to cart
+2. delete product from cart
 3. add address
 4. edit address
 5. delete address
 6. place an order
-7. filtering products
+7. filter products
 8. searching products using the title
 9. loading state for all the functionalities
 10. error handling for all the functionalities (frontend and backEnd)
