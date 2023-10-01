@@ -11,7 +11,7 @@ import actions from "./actions/actions";
 
 import NavBar from "./components/navBar/NavBar";
 import AccountPage from "./pages/accountPage/AccountPage";
-import HomePage from "./pages/homePage/HomePage";
+import HomePage from "./pages/homePage/homePage";
 import { AwaitProductsPage } from "./pages/productsPage/awaitProductsPage";
 import { AwaitCartPage } from "./pages/cartPage/awaitCartPage";
 import { AwaitAdressesPage } from "./pages/addressesPage/awaitAddressesPage";
