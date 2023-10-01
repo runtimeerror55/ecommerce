@@ -34,3 +34,9 @@
       background-color: bisque;
       color: black;
 }
+
+@media (max-width: 1000px) {
+      .my-account {
+            width: 95%;
+      }
+}
