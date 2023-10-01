@@ -1,5 +1,5 @@
 import styles from "./loginPage.module.css";
-import { useNavigate, useFetcher } from "react-router-dom";
+import { useNavigate, useFetcher, Link } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { authContext } from "../../context/authentication";
@@ -39,14 +39,6 @@ export const LoginPage = () => {
                               className={styles["login-form"]}
                         >
                               <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    placeholder="email"
-                                    required
-                                    className={styles["user-details-input"]}
-                              ></input>
-                              <input
                                     type="text"
                                     id="name"
                                     name="name"
@@ -62,12 +54,20 @@ export const LoginPage = () => {
                                     required
                                     className={styles["user-details-input"]}
                               ></input>
-                              <button
-                                    type="submit"
-                                    className={styles["login-button"]}
-                              >
-                                    login
-                              </button>
+                              <div>
+                                    <button
+                                          type="submit"
+                                          className={styles["login-button"]}
+                                    >
+                                          login
+                                    </button>
+                                    <Link
+                                          to="/register"
+                                          className={styles["register-button"]}
+                                    >
+                                          sign up
+                                    </Link>
+                              </div>
                         </loginFetcher.Form>
                   </main>
             </div>

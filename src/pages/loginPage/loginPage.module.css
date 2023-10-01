@@ -3,6 +3,11 @@
       margin: 0;
       border: none;
       line-height: 1.6;
+      padding: 0;
+      text-decoration: none;
+}
+a {
+      font-size: unset;
 }
 .page {
       display: flex;
@@ -51,15 +56,17 @@ heading {
 ::placeholder {
       color: white;
 }
-.login-button {
+.login-button,
+.register-button {
       background-color: darkslategray;
-      padding-left: 10px;
-      padding-right: 10px;
       cursor: pointer;
       color: white;
       padding-left: 20px;
       padding-right: 20px;
-      border-radius: 20px;
+      border-radius: 15px;
+      margin: 5px;
+      font-size: 16px;
+      display: inline-block;
 }
 .login-button:hover {
       box-shadow: 0 0 10px rgb(242, 250, 242);

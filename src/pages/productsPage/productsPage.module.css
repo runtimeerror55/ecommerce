@@ -15,7 +15,10 @@
 
 .filtering-form {
       display: flex;
-      justify-content: space-between;
+      overflow-x: scroll;
+}
+.filtering-form::-webkit-scrollbar {
+      display: none;
 }
 
 select {
@@ -33,12 +36,14 @@ select {
       border: 1px solid black;
 }
 
+.sort-filter {
+      margin-left: auto;
+}
+
 .products-section {
       flex-grow: 1;
       text-align: center;
-      margin: 10px;
       background-color: white;
-      padding: 10px;
       min-height: 100vh;
 }
 
@@ -80,4 +85,16 @@ select {
       border-radius: 20px;
       color: white;
       cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+      .product {
+            padding-left: 0;
+            padding-right: 0;
+            margin: 10px;
+      }
+      .product-image {
+            height: 80px;
+            width: 80px;
+      }
 }

@@ -64,12 +64,6 @@ export default forwardRef(function NavBar(props, ref) {
                                           >
                                                 Login
                                           </Link>
-                                          <Link
-                                                to="/register"
-                                                className={classes["nav-link"]}
-                                          >
-                                                Register
-                                          </Link>
                                     </>
                               )}
                         </div>

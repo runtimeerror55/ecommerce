@@ -32,7 +32,6 @@
       position: relative;
       padding: 5px;
       border-radius: 15px;
-      background-color: black;
 }
 .cart-items-count {
       position: absolute;
@@ -43,9 +42,5 @@
 @media (max-width: 1000px) {
       .logo {
             font-size: 20px;
-      }
-
-      .nav-link {
-            font-size: 13px;
       }
 }
