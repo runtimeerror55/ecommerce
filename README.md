@@ -30,7 +30,7 @@
 5. delete address
 6. place an order
 7. filtering products
-8. searching products using the title
+8. searching products using the title with debounce
 9. loading state for all the functionalities
 10. error handling for all the functionalities (frontend and backEnd)
 11. notifications for all the functionalities
