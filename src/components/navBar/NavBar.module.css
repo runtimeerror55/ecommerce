@@ -10,15 +10,16 @@
 }
 .logo {
       margin: 10px;
-      letter-spacing: 5px;
+      letter-spacing: 3px;
       color: cyan;
 }
 
 .search-bar {
-      width: 300px;
+      width: 30vw;
       height: 30px;
       border-radius: 15px;
       outline: none;
+      padding-left: 15px;
 }
 
 .nav-link {
@@ -37,4 +38,14 @@
       position: absolute;
       right: 0;
       top: -25%;
+}
+
+@media (max-width: 1000px) {
+      .logo {
+            font-size: 20px;
+      }
+
+      .nav-link {
+            font-size: 13px;
+      }
 }

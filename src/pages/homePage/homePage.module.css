@@ -20,6 +20,7 @@
       color: white;
       font-size: 32px;
       margin: 5px;
+      text-align: center;
 }
 
 .products-link {
@@ -72,4 +73,10 @@
 
 .type {
       margin: 10px;
+}
+
+@media (max-width: 1000px) {
+      .headline {
+            font-size: 24px;
+      }
 }
