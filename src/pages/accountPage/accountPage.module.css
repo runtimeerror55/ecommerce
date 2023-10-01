@@ -2,7 +2,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 90vh;
 }
 
 .my-account {
@@ -38,5 +37,11 @@
 @media (max-width: 1000px) {
       .my-account {
             width: 95%;
+            display: flex;
+            flex-direction: column;
+            height: 90vh;
+      }
+      .options {
+            flex-direction: row;
       }
 }
