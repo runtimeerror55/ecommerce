@@ -1,5 +1,4 @@
 import styles from "./homePage.module.css";
-import homeImage from "../../assests/homeImage.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
       faTruck,
