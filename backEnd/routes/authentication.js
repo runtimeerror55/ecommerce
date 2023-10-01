@@ -5,18 +5,15 @@ const jwt = require("jsonwebtoken");
 const UserModel = require("../models/userModel");
 
 router.route("/login").post(async (request, response) => {
-      console.log("login");
       try {
             const { name, password } = request.body;
 
             const user = await UserModel.findOne({ name });
             if (!user) {
-                  console.log("name does not exist");
                   response.status(404).json({ message: "name does not exist" });
             } else {
                   const match = await bcrypt.compare(password, user.password);
                   if (match) {
-                        console.log("succefully logged in");
                         const token = jwt.sign(
                               { _id: user._id, name: user.name },
                               "secret",
@@ -26,7 +23,6 @@ router.route("/login").post(async (request, response) => {
                         );
 
                         const decodedToken = jwt.verify(token, "secret");
-                        console.log(decodedToken);
 
                         response.status(200).json({
                               status: "success",
@@ -40,7 +36,6 @@ router.route("/login").post(async (request, response) => {
                               },
                         });
                   } else {
-                        console.log("password does not match");
                         response
                               .status(500)
                               .json({ message: "incorrect password" });
@@ -65,7 +60,6 @@ router.route("/register")
                         name,
                   });
                   if (isNamePresent) {
-                        console.log("isNamePresent");
                         response.status(500).json({
                               status: "error",
                               message: "username already exists",
@@ -75,7 +69,6 @@ router.route("/register")
 
                   const isEmailPresent = await UserModel.findOne({ email });
                   if (isEmailPresent) {
-                        console.log("email already exists");
                         response.status(500).json({
                               status: "error",
                               message: "email already exists",

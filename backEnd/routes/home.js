@@ -24,7 +24,7 @@ router.route("/").get(async (request, response) => {
                         sort = value;
                   }
             }
-            console.log(finalQuery);
+
             let products = [];
             if (search !== "" && search !== undefined) {
                   products = await ProductModel.find({

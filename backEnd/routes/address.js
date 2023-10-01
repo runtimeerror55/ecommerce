@@ -55,7 +55,6 @@ router.route("/account/addresses")
                               message: "added the address",
                         });
                   }, 1000);
-                  console.log(request.body);
             } catch (error) {
                   response
                         .status(500)

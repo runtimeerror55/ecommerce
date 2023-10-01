@@ -6,7 +6,6 @@ const ProductModel = require("../models/product");
 const { isLoggedIn } = require("../middleware");
 
 router.route("/account/cart").get(isLoggedIn, async (request, response) => {
-      console.log("hello");
       try {
             const cart = await CartModel.findOne({
                   user: request.user._id,
@@ -26,7 +25,6 @@ router.route("/account/cart").get(isLoggedIn, async (request, response) => {
                         message: "fetched cart successfully",
                         payload: cartProducts,
                   });
-                  console.log(cartProducts);
             }, 1000);
       } catch (error) {
             response

@@ -1,5 +1,7 @@
 import { defer } from "react-router-dom";
 import { getToken } from "../utilities/utilities";
+let backEndUrl = "https://ecommerce-backend-ten-mauve.vercel.app/";
+backEndUrl = "http://localhost:3000/";
 export const productsPageLoader = async ({ request }) => {
       return defer({
             data: (async () => {
@@ -25,11 +27,11 @@ export const productsPageLoader = async ({ request }) => {
                         );
 
                         const responseOne = await fetch(
-                              `http://localhost:3000/${queryString}`
+                              `${backEndUrl}${queryString}`
                         );
                         const dataOne = await responseOne.json();
                         const responseTwo = await fetch(
-                              "http://localhost:3000/account/cart",
+                              `${backEndUrl}account/cart`,
                               {
                                     headers: {
                                           authorization: "Bearer " + getToken(),
@@ -55,7 +57,7 @@ export const cartPageLoader = async () => {
             loaderData: (async () => {
                   try {
                         const response = await fetch(
-                              "http://localhost:3000/account/cart",
+                              `${backEndUrl}account/cart`,
                               {
                                     headers: {
                                           authorization: "Bearer " + getToken(),
@@ -77,7 +79,7 @@ export const addressesPageLoader = () => {
       return defer({
             loaderData: (async () => {
                   const response = await fetch(
-                        "http://localhost:3000/account/addresses",
+                        `${backEndUrl}account/addresses`,
                         {
                               headers: {
                                     authorization: "Bearer " + getToken(),
@@ -95,7 +97,7 @@ export const ordersHistoryPageLoader = async () => {
             loaderData: (async () => {
                   try {
                         const response = await fetch(
-                              "http://localhost:3000/account/orders",
+                              `${backEndUrl}account/orders`,
                               {
                                     headers: {
                                           authorization: "Bearer " + getToken(),
@@ -117,7 +119,7 @@ export const OrderSummaryPageLoader = async () => {
             loaderData: (async () => {
                   try {
                         const responseOne = await fetch(
-                              "http://localhost:3000/account/cart",
+                              `${backEndUrl}account/cart`,
                               {
                                     headers: {
                                           authorization: "Bearer " + getToken(),
@@ -126,7 +128,7 @@ export const OrderSummaryPageLoader = async () => {
                         );
                         const dataOne = await responseOne.json();
                         const responseTwo = await fetch(
-                              "http://localhost:3000/account/addresses",
+                              `${backEndUrl}account/addresses`,
                               {
                                     headers: {
                                           authorization: "Bearer " + getToken(),

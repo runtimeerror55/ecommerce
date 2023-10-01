@@ -1,6 +1,7 @@
 import { redirect } from "react-router-dom";
 import { getToken } from "../utilities/utilities";
-
+let backEndUrl = "https://ecommerce-backend-ten-mauve.vercel.app/";
+backEndUrl = "http://localhost:3000/";
 const actions = async ({ request, params }) => {
       let url = new URL(request.url);
       const type = url.searchParams.get("type");
@@ -31,7 +32,7 @@ const addToCartAction = async (params) => {
       console.log(params);
       try {
             const response = await fetch(
-                  "http://localhost:3000/account/cart/" + `${params.id}`,
+                  backEndUrl + "account/cart/" + `${params.id}`,
                   {
                         method: "POST",
                         headers: {
@@ -50,7 +51,7 @@ const addToCartAction = async (params) => {
 const removeFromCartAction = async (params) => {
       try {
             const response = await fetch(
-                  "http://localhost:3000/account/cart/" + `${params.id}`,
+                  backEndUrl + "account/cart/" + `${params.id}`,
                   {
                         method: "DELETE",
                         headers: {
@@ -74,17 +75,14 @@ const addAddress = async (request) => {
             const body = Object.fromEntries(formData);
             console.log(body);
 
-            const response = await fetch(
-                  "http://localhost:3000/account/addresses",
-                  {
-                        method: "POST",
-                        headers: {
-                              "Content-Type": "application/json",
-                              authorization: "Bearer " + getToken(),
-                        },
-                        body: JSON.stringify(body),
-                  }
-            );
+            const response = await fetch(backEndUrl + "account/addresses", {
+                  method: "POST",
+                  headers: {
+                        "Content-Type": "application/json",
+                        authorization: "Bearer " + getToken(),
+                  },
+                  body: JSON.stringify(body),
+            });
 
             const data = await response.json();
 
@@ -96,15 +94,12 @@ const addAddress = async (request) => {
 
 const placeOrder = async () => {
       try {
-            const response = await fetch(
-                  "http://localhost:3000/account/orders",
-                  {
-                        method: "POST",
-                        headers: {
-                              authorization: "Bearer " + getToken(),
-                        },
-                  }
-            );
+            const response = await fetch(backEndUrl + "account/orders", {
+                  method: "POST",
+                  headers: {
+                        authorization: "Bearer " + getToken(),
+                  },
+            });
             const data = response.json();
             if (data.status === "error") {
                   return data;
@@ -122,7 +117,7 @@ const editAddress = async (request, params) => {
             const body = Object.fromEntries(formData);
 
             const response = await fetch(
-                  `http://localhost:3000/account/addresses/${params.id}`,
+                  backEndUrl + `account/addresses/${params.id}`,
                   {
                         method: "PUT",
                         headers: {
@@ -142,7 +137,7 @@ const editAddress = async (request, params) => {
 const deleteAddress = async (params) => {
       try {
             const response = await fetch(
-                  `http://localhost:3000/account/addresses/${params.id}`,
+                  backEndUrl + `account/addresses/${params.id}`,
                   {
                         method: "DELETE",
                         headers: {
@@ -161,7 +156,7 @@ export const registerAction = async (request) => {
       try {
             const formData = await request.formData();
             const body = Object.fromEntries(formData);
-            const response = await fetch("http://localhost:3000/register", {
+            const response = await fetch(backEndUrl + "register", {
                   headers: {
                         "Content-Type": "application/json",
                   },
@@ -179,7 +174,7 @@ export const loginAction = async (request) => {
       try {
             const formData = await request.formData();
             const body = Object.fromEntries(formData);
-            const response = await fetch("http://localhost:3000/login", {
+            const response = await fetch(backEndUrl + "login", {
                   headers: {
                         "Content-Type": "application/json",
                   },
