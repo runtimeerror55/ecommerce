@@ -1,0 +1,43 @@
+.new-address-overlay {
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.8);
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+}
+.new-address-overlay-close-button {
+      color: white;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 32px;
+      cursor: pointer;
+      background-color: transparent;
+}
+
+.address-form {
+      background-color: bisque;
+      padding: 5px;
+      display: flex;
+      flex-direction: column;
+      height: 400px;
+}
+.address-details {
+      display: flex;
+      flex-direction: column;
+      height: 400px;
+      background-color: bisque;
+      justify-content: space-between;
+      width: 300px;
+}
+
+.input {
+      margin: 3px;
+      padding: 5px;
+      border-radius: 5px;
+      border: 2px solid brown;
+}

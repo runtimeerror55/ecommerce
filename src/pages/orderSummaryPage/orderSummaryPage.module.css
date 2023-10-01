@@ -1,0 +1,69 @@
+.main {
+      display: flex;
+      justify-content: center;
+}
+
+.addresses-section {
+      display: flex;
+      flex-direction: column;
+      margin: 10px;
+      padding: 10px;
+      background-color: bisque;
+      border-radius: 20px;
+}
+
+.address-radio {
+      width: fit-content;
+      margin-top: 5px;
+}
+
+.add-address-button {
+      background-color: green;
+      padding: 5px;
+      border-radius: 5px;
+      color: white;
+      margin: 5px;
+      text-align: center;
+      margin-top: auto;
+      margin-left: auto;
+      cursor: pointer;
+}
+
+.order-summary-section {
+      color: black;
+      background-color: white;
+      height: fit-content;
+      margin: 10px;
+      border-radius: 20px;
+      text-align: center;
+      padding: 10px;
+      width: 400px;
+      background-color: bisque;
+}
+
+.detail {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+}
+
+.value {
+      font-weight: bold;
+      color: #ad5502;
+      font-size: 1.25rem;
+}
+
+.checkout-button {
+      font-weight: bold;
+      flex-grow: 1;
+      font-size: 20px;
+      background-color: #8a2b06;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-top: 1px;
+      padding-bottom: 1px;
+      border-radius: 20px;
+      color: white;
+      margin: 3px;
+      cursor: pointer;
+}
