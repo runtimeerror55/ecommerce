@@ -22,7 +22,7 @@ import { RegisterPage } from "./pages/registerPage/registerPage";
 import { ProfilePage } from "./pages/profilePage/profilePage";
 
 import { AuthProvider } from "./context/authentication";
-
+import "./App.css";
 const router = createBrowserRouter([
       {
             path: "/",
