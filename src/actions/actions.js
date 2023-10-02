@@ -101,11 +101,7 @@ const placeOrder = async () => {
                   },
             });
             const data = response.json();
-            if (data.status === "error") {
-                  return data;
-            } else {
-                  return redirect("/account/orders");
-            }
+            return data;
       } catch (error) {
             return { status: "error", message: error.message };
       }

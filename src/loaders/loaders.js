@@ -26,6 +26,8 @@ export const productsPageLoader = async ({ request }) => {
                               "?"
                         );
 
+                        console.log(queryString);
+
                         const responseOne = await fetch(
                               `${backEndUrl}${queryString}`
                         );

@@ -76,7 +76,8 @@ select {
       color: #ad5502;
       font-size: 1.25rem;
 }
-.add-to-cart-button {
+.add-to-cart-button,
+.cart-link {
       font-weight: bold;
       font-size: 15px;
       background-color: #8a2b06;
@@ -86,6 +87,14 @@ select {
       border-radius: 20px;
       color: white;
       cursor: pointer;
+}
+
+.cart-link {
+      display: inline-block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: green;
 }
 
 @media (max-width: 1000px) {

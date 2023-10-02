@@ -4,6 +4,7 @@ import {
       useAsyncError,
       useAsyncValue,
       useSubmit,
+      Link,
 } from "react-router-dom";
 import classes from "./productsPage.module.css";
 import { ButtonWithActionAndLoader } from "../../components/buttons/buttonWithActionAndLoader";
@@ -51,21 +52,19 @@ const Product = ({ product }) => {
                   </div>
                   <div>
                         {isProductPresentInTheCart ? (
-                              <ButtonWithActionAndLoader
-                                    method="DELETE"
-                                    action={`/account/cart/${product._id}?type=remove+from+cart`}
-                                    buttonClass={classes["add-to-cart-button"]}
-                                    buttonText="Remove"
-                                    loaderHeight="20"
-                                    loaderWidth="100"
-                              ></ButtonWithActionAndLoader>
+                              <Link
+                                    to="/account/cart"
+                                    className={classes["cart-link"]}
+                              >
+                                    Go to cart
+                              </Link>
                         ) : (
                               <ButtonWithActionAndLoader
                                     method="POST"
                                     action={`/account/cart/${product._id}?type=add+to+cart`}
                                     buttonClass={classes["add-to-cart-button"]}
                                     buttonText="Add"
-                                    loaderHeight="20"
+                                    loaderHeight="25"
                                     loaderWidth="100"
                               ></ButtonWithActionAndLoader>
                         )}

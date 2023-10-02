@@ -27,7 +27,7 @@ export default function ProductsPage() {
             productsFetcher.state === "idle" && productsFetcher.data;
 
       const [filterFormValues, setFilterFormValues] = useState(null);
-      const [searchBarValue, setSearchBarValue] = useState(null);
+      const [searchBarValue, setSearchBarValue] = useState("");
 
       const [showFilterchangeLoader, setShowFilterChangeLoader] =
             useState(false);
@@ -46,7 +46,7 @@ export default function ProductsPage() {
       };
 
       useEffect(() => {
-            if (searchBarValue !== null) {
+            if (searchBarValue !== "") {
                   const id = setTimeout(() => {
                         productsFetcher.submit(
                               { search: searchBarValue },

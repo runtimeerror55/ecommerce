@@ -1,7 +1,9 @@
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import styles from "./orderSummaryPage.module.css";
+import { ButtonWithActionAndLoader } from "../../components/buttons/buttonWithActionAndLoader";
 
 const OrderSummary = ({ cartProductsData }) => {
+      const navigate = useNavigate();
       let totalPrice = 0;
       let priceOfAllProducts = 0;
       let discount = 0;
@@ -20,6 +22,10 @@ const OrderSummary = ({ cartProductsData }) => {
             );
             totalPrice = priceOfAllProducts - discount + deliveryCharges;
       }
+
+      const callBack = () => {
+            navigate("/account/orders");
+      };
       return (
             <>
                   <h2>
@@ -62,16 +68,16 @@ const OrderSummary = ({ cartProductsData }) => {
                         <i className={styles.value}>$ {totalPrice}</i>
                   </div>
                   <hr></hr>
-                  <Form method="POST" action="/account/orders?type=place+order">
-                        <div className={styles["detail"]}>
-                              <button
-                                    type="submit"
-                                    className={styles["checkout-button"]}
-                              >
-                                    Place Order
-                              </button>
-                        </div>
-                  </Form>
+                  <ButtonWithActionAndLoader
+                        method="POST"
+                        action="/account/orders?type=place+order"
+                        buttonText="Place Order"
+                        buttonClass={styles["checkout-button"]}
+                        formClass={styles["detail"]}
+                        callBack={callBack}
+                        loaderHeight="35"
+                        loaderWidth="100%"
+                  ></ButtonWithActionAndLoader>
             </>
       );
 };

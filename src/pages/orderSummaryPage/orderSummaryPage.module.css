@@ -11,6 +11,7 @@
       width: 60%;
       max-width: 1000px;
       border-bottom: 1px solid #ccc;
+      height: fit-content;
 }
 .addresses-section-heading {
       text-align: center;
@@ -68,6 +69,7 @@
       color: white;
       margin: 3px;
       cursor: pointer;
+      height: 35px;
 }
 
 @media (max-width: 1000px) {
