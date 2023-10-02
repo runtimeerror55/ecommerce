@@ -19,7 +19,11 @@ const OrderSummaryPage = () => {
             <>
                   <main className={styles.main}>
                         <section className={styles["addresses-section"]}>
-                              <h2>
+                              <h2
+                                    className={
+                                          styles["addresses-section-heading"]
+                                    }
+                              >
                                     <i>Saved Addresses</i>
                               </h2>
                               <hr></hr>

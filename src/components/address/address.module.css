@@ -1,7 +1,7 @@
 .address {
       display: flex;
       flex-direction: column;
-      border-bottom: 2px solid rgb(219, 112, 19);
+      border-bottom: 1px solid #ccc;
       margin: 5px;
       padding: 5px;
 }
