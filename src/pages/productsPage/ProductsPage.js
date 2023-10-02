@@ -64,10 +64,13 @@ export default function ProductsPage() {
 
       useEffect(() => {
             if (filterFormValues !== null) {
-                  productsFetcher.submit(filterFormValues, {
-                        method: "GET",
-                        action: "/products",
-                  });
+                  productsFetcher.submit(
+                        { ...filterFormValues, search: searchBarValue },
+                        {
+                              method: "GET",
+                              action: "/products",
+                        }
+                  );
                   console.log("yess");
             }
       }, [filterFormValues]);

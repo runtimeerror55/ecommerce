@@ -14,6 +14,7 @@ export const ButtonWithActionAndLoader = ({
       formClass,
       loaderHeight,
       loaderWidth,
+      callBack,
 }) => {
       const updatePlayListsFetcher = useFetcher();
 
@@ -29,6 +30,9 @@ export const ButtonWithActionAndLoader = ({
 
                   if (data.status === "success") {
                         toast.success(data.message, toastOptions);
+                        if (callBack) {
+                              callBack(data);
+                        }
                   } else {
                         toast.error(data.message, toastOptions);
                   }

@@ -10,7 +10,7 @@ import { ButtonWithActionAndLoader } from "../../components/buttons/buttonWithAc
 import laptop from "../../assests/laptop.jpg";
 const Product = ({ product }) => {
       const { loaderTwoData } = useAsyncValue();
-      const isProductPresentInTheCart = loaderTwoData.payload.some(
+      const isProductPresentInTheCart = loaderTwoData?.payload?.some(
             (cartProduct) => {
                   return cartProduct.product._id === product._id;
             }
