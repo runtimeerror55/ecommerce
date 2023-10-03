@@ -8,7 +8,12 @@ const ProductsListing = ({ loaderOneData }) => {
       return (
             <section className={classes["products-section"]}>
                   {loaderOneData.payload.map((product) => {
-                        return <Product product={product}></Product>;
+                        return (
+                              <Product
+                                    product={product}
+                                    key={product._id}
+                              ></Product>
+                        );
                   })}
             </section>
       );

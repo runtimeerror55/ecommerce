@@ -12,7 +12,7 @@ router.route("/account/addresses")
                   }).populate("addresses");
 
                   if (!addressHistory) {
-                        addressHistory = {};
+                        addressHistory = { addresses: [] };
                   }
                   setTimeout(() => {
                         response.status(200).json({

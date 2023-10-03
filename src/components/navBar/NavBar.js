@@ -16,7 +16,7 @@ export default forwardRef(function NavBar(props, ref) {
       return (
             <>
                   <nav className={classes["nav-bar"]}>
-                        <h1 class={classes.logo}>ELECTRO</h1>
+                        <h1 className={classes.logo}>ELECTRO</h1>
 
                         <input
                               ref={ref}

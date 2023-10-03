@@ -17,40 +17,38 @@ const Product = ({ product }) => {
             }
       );
 
-      const submit = useSubmit();
-
       return (
             <div className={classes.product}>
-                  <div>
+                  <div className={classes["product-image-and-info"]}>
                         <img
-                              src={laptop}
+                              src={product.image}
                               className={classes["product-image"]}
                               alt={product.name}
                         ></img>
-                        <h3 className={classes["product-name"]}>
-                              <i>{product.name}</i>
-                        </h3>
 
-                        <div className={classes["product-description"]}></div>
+                        <div className={classes["product-information"]}>
+                              <h2 className={classes["product-name"]}>
+                                    <i>{product.name}</i>
+                              </h2>
+                              <div>
+                                    <i>{product.cpuBrand}</i>
+                              </div>
+                              <div>
+                                    <i>{product.ram}</i>
+                              </div>
+                              <div>
+                                    <i>240hz refresh rate</i>
+                              </div>
+                              <div>
+                                    <i>{product.storage}</i>
+                              </div>
+                        </div>
+                  </div>
+
+                  <div>
                         <div className={classes["product-price"]}>
                               <i>${product.price}</i>
                         </div>
-                  </div>
-                  <div>
-                        <div>
-                              <i>{product.cpuBrand}</i>
-                        </div>
-                        <div>
-                              <i>{product.ram}</i>
-                        </div>
-                        <div>
-                              <i>240hz refresh rate</i>
-                        </div>
-                        <div>
-                              <i>{product.storage}</i>
-                        </div>
-                  </div>
-                  <div>
                         {isProductPresentInTheCart ? (
                               <Link
                                     to="/account/cart"

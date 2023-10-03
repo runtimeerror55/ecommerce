@@ -15,19 +15,20 @@ import { toast } from "react-toastify";
 import { toastOptions } from "../../utilities/utilities";
 import { clear } from "@testing-library/user-event/dist/clear";
 import { PageLandingLoader } from "../../components/loaders/pageLandingLoader";
+import { ToastContainer } from "react-toastify";
 
 export default function ProductsPage() {
       const [loaderOneData, setLoaderOneData] = useState(
             useAsyncValue().loaderOneData
       );
       const searchBarRef = useRef();
-      const submit = useSubmit();
       const productsFetcher = useFetcher();
       const productsFetcherStatus =
             productsFetcher.state === "idle" && productsFetcher.data;
 
       const [filterFormValues, setFilterFormValues] = useState(null);
       const [searchBarValue, setSearchBarValue] = useState("");
+      const [filtersKey, setFiltersKey] = useState(false);
 
       const [showFilterchangeLoader, setShowFilterChangeLoader] =
             useState(false);
@@ -55,6 +56,9 @@ export default function ProductsPage() {
                                     action: "/products",
                               }
                         );
+                        setFiltersKey((previous) => {
+                              return !previous;
+                        });
                   }, 500);
                   return () => {
                         clearTimeout(id);
@@ -93,16 +97,21 @@ export default function ProductsPage() {
                   setShowFilterChangeLoader(true);
             }
       }, [productsFetcher]);
+
       return (
             <>
-                  <productsFetcher
+                  <ToastContainer></ToastContainer>
+                  <div
                         method="GET"
                         action="/products"
                         onChange={filterChangeHandler}
                   >
                         <NavBar ref={searchBarRef}></NavBar>
-                        <Filtering ref={searchBarRef}></Filtering>
-                  </productsFetcher>
+                        <Filtering
+                              ref={searchBarRef}
+                              key={filtersKey}
+                        ></Filtering>
+                  </div>
                   <main className={classes.main}>
                         {showFilterchangeLoader ? (
                               <PageLandingLoader></PageLandingLoader>

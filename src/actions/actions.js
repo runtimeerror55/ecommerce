@@ -6,6 +6,9 @@ const actions = async ({ request, params }) => {
       let url = new URL(request.url);
       const type = url.searchParams.get("type");
       console.log(type);
+      if (type !== "login user" && "register user" && !getToken()) {
+            return redirect("/login");
+      }
 
       if (type === "add to cart") {
             return await addToCartAction(params);
@@ -182,5 +185,13 @@ export const loginAction = async (request) => {
             return data;
       } catch (error) {
             return { status: "error", message: error.message };
+      }
+};
+
+export const privateRoute = () => {
+      if (!getToken()) {
+            return redirect("/login");
+      } else {
+            return "hello there";
       }
 };

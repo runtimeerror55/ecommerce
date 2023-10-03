@@ -1,4 +1,4 @@
-import { defer } from "react-router-dom";
+import { defer, redirect } from "react-router-dom";
 import { getToken } from "../utilities/utilities";
 let backEndUrl = "https://ecommerce-backend-ten-mauve.vercel.app/";
 // backEndUrl = "http://localhost:3000/";
@@ -54,7 +54,9 @@ export const productsPageLoader = async ({ request }) => {
 };
 
 export const cartPageLoader = async () => {
-      console.log("hello");
+      if (!getToken()) {
+            return redirect("/login");
+      }
       return defer({
             loaderData: (async () => {
                   try {
@@ -77,7 +79,9 @@ export const cartPageLoader = async () => {
 };
 
 export const addressesPageLoader = () => {
-      console.log("addressesPageLoader");
+      if (!getToken()) {
+            return redirect("/login");
+      }
       return defer({
             loaderData: (async () => {
                   const response = await fetch(
@@ -95,6 +99,9 @@ export const addressesPageLoader = () => {
 };
 
 export const ordersHistoryPageLoader = async () => {
+      if (!getToken()) {
+            return redirect("/login");
+      }
       return defer({
             loaderData: (async () => {
                   try {
@@ -117,6 +124,9 @@ export const ordersHistoryPageLoader = async () => {
 };
 
 export const OrderSummaryPageLoader = async () => {
+      if (!getToken()) {
+            return redirect("/login");
+      }
       return defer({
             loaderData: (async () => {
                   try {

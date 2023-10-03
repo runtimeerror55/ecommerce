@@ -4,6 +4,10 @@ const OrderModel = require("./models/order");
 const CartModel = require("./models/cart");
 const CartProductModel = require("./models/cartProduct");
 const OrderHistoryModel = require("./models/orderHistory");
+// .connect("mongodb://127.0.0.1:27017/ecommerce")
+// .connect(
+//     "mongodb+srv://aakashdeep954:a1S6mNXvLK0b158x@portfoliocluster.c1qp6ud.mongodb.net/ecommerce?retryWrites=true&w=majority"
+// )
 
 mongoose
       .connect(
@@ -128,7 +132,24 @@ async function a() {
 
 let brands = ["Asus", "Msi", "Dell", "Apple", "Hp"];
 let cpu = ["Amd", "Intel"];
+let cpus = ["i5-12450h", "i7-13700hx", "i7-12700h"];
 let ram = ["8", "16", "32"];
+let storages = ["1Tb ssd", "512Gb ssd", "2Tb hdd"];
+let images = [
+      "https://rukminim2.flixcart.com/image/416/416/xif0q/computer/h/k/x/-original-imagtvq8w2nsamdh.jpeg?q=70",
+      "https://rukminim2.flixcart.com/image/416/416/xif0q/computer/y/t/g/stealth-16-studio-a13vg-030in-laptop-msi-original-imagrgwb8hjdyyhx.jpeg?q=70",
+      "https://rukminim2.flixcart.com/image/416/416/xif0q/computer/y/h/w/-original-imaghzahgukpkyfu.jpeg?q=70",
+      "https://rukminim2.flixcart.com/image/416/416/xif0q/computer/y/i/y/mphg3hn-a-thin-and-light-laptop-apple-original-imagmfhepavqyfyy.jpeg?q=70",
+      "https://rukminim2.flixcart.com/image/416/416/xif0q/computer/r/y/n/x360-bf0059tu-thin-and-light-laptop-hp-original-imagh4z7h3f56xxj.jpeg?q=70",
+];
+
+let names = [
+      "Asus Rog strix 15",
+      "Msi stealth studio",
+      "Dell inspiron 55320",
+      "Apple macbook M2 max",
+      "Hp envy x360",
+];
 
 for (let i = 0; i < 50; i++) {
       let randonmBrand = Math.floor(Math.random() * 5);
@@ -138,11 +159,13 @@ for (let i = 0; i < 50; i++) {
       const product = {
             brand: brands[randonmBrand],
             cpuBrand: cpu[randomCpu],
+            cpu: cpu[randomRam],
             ram: ram[randomRam],
             price: randomPrice,
-            category: "Laptop",
-            name: brands[randonmBrand],
-            storage: "1 Tb ssd",
+            category: "laptops",
+            name: names[randonmBrand],
+            storage: storages[randomRam],
+            image: images[randonmBrand],
       };
       const newProduct = new ProductModel(product);
       newProduct.save();
