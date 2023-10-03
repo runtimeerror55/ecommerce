@@ -53,6 +53,7 @@ router.route("/register")
             response.json("yes");
       })
       .post(async (request, response) => {
+            console.log(request.body);
             try {
                   const { name, password, email } = request.body;
 
@@ -91,6 +92,7 @@ router.route("/register")
                               expiresIn: 60 * 60,
                         }
                   );
+                  const decodedToken = jwt.verify(token, "secret");
                   response.status(200).json({
                         status: "success",
                         message: "succesfully registered",
@@ -99,6 +101,7 @@ router.route("/register")
                               user: {
                                     name: newUser.name,
                               },
+                              expiresAt: decodedToken.exp,
                         },
                   });
             } catch (error) {

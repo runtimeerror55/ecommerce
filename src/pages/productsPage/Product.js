@@ -31,16 +31,24 @@ const Product = ({ product }) => {
                                     <i>{product.name}</i>
                               </h2>
                               <div>
-                                    <i>{product.cpuBrand}</i>
+                                    <i className={classes["info"]}>
+                                          {product.cpu}
+                                    </i>
                               </div>
                               <div>
-                                    <i>{product.ram}</i>
+                                    <i className={classes["info"]}>
+                                          {product.ram}gb ram
+                                    </i>
                               </div>
                               <div>
-                                    <i>240hz refresh rate</i>
+                                    <i className={classes["info"]}>
+                                          240hz refresh rate
+                                    </i>
                               </div>
                               <div>
-                                    <i>{product.storage}</i>
+                                    <i className={classes["info"]}>
+                                          {product.storage}
+                                    </i>
                               </div>
                         </div>
                   </div>
@@ -63,7 +71,7 @@ const Product = ({ product }) => {
                                     buttonClass={classes["add-to-cart-button"]}
                                     buttonText="Add"
                                     loaderHeight="25"
-                                    loaderWidth="100"
+                                    loaderWidth="100%"
                               ></ButtonWithActionAndLoader>
                         )}
                   </div>

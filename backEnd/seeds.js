@@ -159,7 +159,7 @@ for (let i = 0; i < 50; i++) {
       const product = {
             brand: brands[randonmBrand],
             cpuBrand: cpu[randomCpu],
-            cpu: cpu[randomRam],
+            cpu: cpus[randomRam],
             ram: ram[randomRam],
             price: randomPrice,
             category: "laptops",

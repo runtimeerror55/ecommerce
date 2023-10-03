@@ -15,15 +15,12 @@ export const AuthProvider = ({ children }) => {
       };
 
       const login = (data) => {
-            console.log(localStorage.getItem("token"));
-
             setToken(data.payload.token);
             setUser(data.payload.user);
             localStorage.setItem("token", JSON.stringify(data.payload.token));
             setTimeout(() => {
                   logout();
             }, data.payload.expiresAt * 1000 - Date.now());
-            console.log(localStorage.getItem("token"));
       };
       console.log(token, user);
 

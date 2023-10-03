@@ -120,6 +120,14 @@ select {
             width: 120px;
       }
       .product-name {
-            font-size: 20px;
+            font-size: 18px;
+      }
+      .add-to-cart-button,
+      .cart-link {
+            width: 80px;
+            height: 25px;
+      }
+      .info {
+            font-size: 14px;
       }
 }

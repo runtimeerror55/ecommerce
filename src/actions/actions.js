@@ -6,7 +6,8 @@ const actions = async ({ request, params }) => {
       let url = new URL(request.url);
       const type = url.searchParams.get("type");
       console.log(type);
-      if (type !== "login user" && "register user" && !getToken()) {
+      if (type !== "login user" && type !== "register user" && !getToken()) {
+            console.log("yes");
             return redirect("/login");
       }
 
