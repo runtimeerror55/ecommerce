@@ -189,13 +189,17 @@ export const profilePageLoader = () => {
       }
       return defer({
             loaderData: (async () => {
-                  const response = await fetch(`${backEndUrl}user`, {
-                        headers: {
-                              authorization: "Bearer " + getToken(),
-                        },
-                  });
-                  const data = await response.json();
-                  return data;
+                  try {
+                        const response = await fetch(`${backEndUrl}user`, {
+                              headers: {
+                                    authorization: "Bearer " + getToken(),
+                              },
+                        });
+                        const data = await response.json();
+                        return data;
+                  } catch (error) {
+                        return { status: "error", message: error.message };
+                  }
             })(),
       });
 };

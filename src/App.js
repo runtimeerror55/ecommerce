@@ -22,7 +22,7 @@ import { AwaitOrderSummaryPage } from "./pages/orderSummaryPage/awaitOrderSummar
 import { AwaitProfilePage } from "./pages/profilePage/awaitProfilePage";
 import { LoginPage } from "./pages/loginPage/loginPage";
 import { RegisterPage } from "./pages/registerPage/registerPage";
-import { ProfilePage } from "./pages/profilePage/profilePage";
+import { ErrorPage } from "./components/errors/error";
 
 import { AuthProvider } from "./context/authentication";
 import { SearchProvider } from "./context/search";
@@ -31,6 +31,7 @@ const router = createBrowserRouter([
       {
             path: "/",
             element: <NavBar></NavBar>,
+            errorElement: <ErrorPage></ErrorPage>,
 
             children: [
                   {
