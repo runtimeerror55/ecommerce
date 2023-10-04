@@ -22,6 +22,7 @@ export default function ProductsPage() {
             useAsyncValue().loaderOneData
       );
 
+      console.log(useAsyncValue());
       const productsFetcher = useFetcher();
       const productsFetcherStatus =
             productsFetcher.state === "idle" && productsFetcher.data;
@@ -29,12 +30,12 @@ export default function ProductsPage() {
       const { searchBarValue, filterFormValues } = useContext(searchContext);
 
       const [filtersKey, setFiltersKey] = useState(false);
-
+      const [flag, setFlag] = useState(false);
       const [showFilterchangeLoader, setShowFilterChangeLoader] =
             useState(false);
 
       useEffect(() => {
-            if (searchBarValue !== "") {
+            if (searchBarValue !== "" && flag) {
                   const id = setTimeout(() => {
                         productsFetcher.submit(
                               { search: searchBarValue },
@@ -50,6 +51,9 @@ export default function ProductsPage() {
                   return () => {
                         clearTimeout(id);
                   };
+            }
+            if (!flag) {
+                  setFlag(true);
             }
       }, [searchBarValue]);
 

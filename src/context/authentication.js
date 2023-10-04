@@ -22,7 +22,6 @@ export const AuthProvider = ({ children }) => {
                   logout();
             }, data.payload.expiresAt * 1000 - Date.now());
       };
-      console.log(token, user);
 
       useEffect(() => {
             if (token) {
@@ -30,10 +29,8 @@ export const AuthProvider = ({ children }) => {
                   const user = decodeToken(token);
 
                   if (isMyTokenExpired) {
-                        console.log(user);
                         logout();
                   } else {
-                        console.log(user.exp * 1000 - Date.now());
                         setTimeout(() => {
                               logout();
                         }, user.exp * 1000 - Date.now());

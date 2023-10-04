@@ -28,23 +28,26 @@ export const productsPageLoader = async ({ request }) => {
 
                         console.log(queryString);
 
-                        const responseOne = await fetch(
+                        const responseOne = fetch(
                               `${backEndUrl}${queryString}`
                         );
-                        const dataOne = await responseOne.json();
-                        const responseTwo = await fetch(
-                              `${backEndUrl}account/cart`,
-                              {
-                                    headers: {
-                                          authorization: "Bearer " + getToken(),
-                                    },
-                              }
-                        );
-                        const dataTwo = await responseTwo.json();
+                        // const dataOne = await responseOne.json();
+                        const responseTwo = fetch(`${backEndUrl}account/cart`, {
+                              headers: {
+                                    authorization: "Bearer " + getToken(),
+                              },
+                        });
+                        // const dataTwo = await responseTwo.json();
+
+                        const [dataOne, dataTwo] = await Promise.allSettled([
+                              responseOne,
+                              responseTwo,
+                        ]);
+                        console.log(dataOne, dataTwo);
 
                         return {
-                              loaderOneData: dataOne,
-                              loaderTwoData: dataTwo,
+                              loaderOneData: await dataOne.value.json(),
+                              loaderTwoData: await dataTwo.value.json(),
                         };
                   } catch (error) {
                         return { status: "error", message: error.message };

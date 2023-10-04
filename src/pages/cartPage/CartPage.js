@@ -26,6 +26,7 @@ export default function CartPage() {
                                     return (
                                           <CartProduct
                                                 cartProduct={cartProduct}
+                                                key={cartProduct._id}
                                           ></CartProduct>
                                     );
                               })}

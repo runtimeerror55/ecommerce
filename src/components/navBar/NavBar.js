@@ -31,9 +31,9 @@ export default forwardRef(function NavBar(props, ref) {
       const cartProductsFetcherStatus =
             cartProductsFetcher.data && cartProductsFetcher.state === "idle";
       useEffect(() => {
-            console.log("hello");
+            console.log("hello", location);
             cartProductsFetcher.load("/account/cart");
-      }, [location.pathname]);
+      }, []);
 
       useEffect(() => {
             if (cartProductsFetcherStatus) {
