@@ -2,6 +2,13 @@
       display: flex;
 }
 
+.empty-cart {
+      height: calc(100svh - 50px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+}
+
 .cart-products {
       width: 70vw;
       background-color: white;
@@ -16,8 +23,7 @@
 }
 
 .product-image {
-      height: 80px;
-      width: 80px;
+      width: 120px;
 }
 .product-name {
       margin-bottom: 3px;

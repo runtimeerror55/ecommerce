@@ -1,8 +1,13 @@
-import { forwardRef } from "react";
+import { forwardRef, useContext } from "react";
 import classes from "./productsPage.module.css";
+import { searchContext } from "../../context/search";
 const Filtering = forwardRef((props, ref) => {
+      const { filterChangeHandler } = useContext(searchContext);
       return (
-            <section className={classes["filtering-section"]}>
+            <section
+                  className={classes["filtering-section"]}
+                  onChange={filterChangeHandler}
+            >
                   <div className={classes["filtering-form"]}>
                         <select name="category">
                               <option value="" disabled selected>

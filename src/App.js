@@ -6,6 +6,8 @@ import {
       addressesPageLoader,
       ordersHistoryPageLoader,
       OrderSummaryPageLoader,
+      navBarLoader,
+      profilePageLoader,
 } from "./loaders/loaders";
 import actions from "./actions/actions";
 
@@ -17,11 +19,13 @@ import { AwaitCartPage } from "./pages/cartPage/awaitCartPage";
 import { AwaitAdressesPage } from "./pages/addressesPage/awaitAddressesPage";
 import { AwaitOrdersHistoryPage } from "./pages/ordersHistoryPage/awaitOrdersHistoryPage";
 import { AwaitOrderSummaryPage } from "./pages/orderSummaryPage/awaitOrderSummaryPage";
+import { AwaitProfilePage } from "./pages/profilePage/awaitProfilePage";
 import { LoginPage } from "./pages/loginPage/loginPage";
 import { RegisterPage } from "./pages/registerPage/registerPage";
 import { ProfilePage } from "./pages/profilePage/profilePage";
 
 import { AuthProvider } from "./context/authentication";
+import { SearchProvider } from "./context/search";
 import "./App.css";
 const router = createBrowserRouter([
       {
@@ -32,6 +36,11 @@ const router = createBrowserRouter([
                   {
                         path: "/",
                         element: <HomePage></HomePage>,
+                  },
+                  {
+                        path: "/products",
+                        element: <AwaitProductsPage></AwaitProductsPage>,
+                        loader: productsPageLoader,
                   },
 
                   {
@@ -62,7 +71,10 @@ const router = createBrowserRouter([
                               },
                               {
                                     path: "profile",
-                                    element: <ProfilePage></ProfilePage>,
+                                    element: (
+                                          <AwaitProfilePage></AwaitProfilePage>
+                                    ),
+                                    loader: profilePageLoader,
                               },
                         ],
                   },
@@ -85,11 +97,7 @@ const router = createBrowserRouter([
             path: "account/addresses/:id",
             action: actions,
       },
-      {
-            path: "/products",
-            element: <AwaitProductsPage></AwaitProductsPage>,
-            loader: productsPageLoader,
-      },
+
       {
             path: "/login",
             element: <LoginPage></LoginPage>,
@@ -105,7 +113,9 @@ const router = createBrowserRouter([
 function App() {
       return (
             <AuthProvider>
-                  <RouterProvider router={router} />
+                  <SearchProvider>
+                        <RouterProvider router={router} />
+                  </SearchProvider>
             </AuthProvider>
       );
 }

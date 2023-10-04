@@ -6,7 +6,7 @@ import { Await, useLoaderData } from "react-router-dom";
 
 export const AwaitCartPage = () => {
       const { loaderData } = useLoaderData();
-      console.log(loaderData);
+
       return (
             <Suspense
                   fallback={

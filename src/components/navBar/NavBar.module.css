@@ -35,8 +35,13 @@
 }
 .cart-items-count {
       position: absolute;
-      right: 0;
-      top: -25%;
+      right: -5px;
+      top: -10px;
+      background-color: green;
+      border-radius: 50%;
+      width: 26px;
+      height: 26px;
+      text-align: center;
 }
 
 @media (max-width: 1000px) {

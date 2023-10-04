@@ -9,7 +9,7 @@ const AddressesPage = () => {
       const addAddressButtonClickHandler = () => {
             setShowAddressOverlay(true);
       };
-      console.log(loaderData);
+
       return (
             <>
                   <div className={styles["option-data"]}>

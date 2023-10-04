@@ -6,7 +6,7 @@ import { LoaderOne } from "../../components/loaders/loaderOne";
 
 export const AwaitAdressesPage = () => {
       const { loaderData } = useLoaderData();
-
+      console.log(loaderData);
       return (
             <Suspense fallback={<LoaderOne></LoaderOne>}>
                   <Await resolve={loaderData}>

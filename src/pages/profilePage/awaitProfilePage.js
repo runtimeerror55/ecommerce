@@ -1,16 +1,16 @@
 import { Suspense } from "react";
 
-import OrdersHistoryPage from "./OrdersHistoryPage";
+import { ProfilePage } from "./profilePage";
 import { Await, useLoaderData } from "react-router-dom";
 import { LoaderOne } from "../../components/loaders/loaderOne";
 
-export const AwaitOrdersHistoryPage = () => {
+export const AwaitProfilePage = () => {
       const { loaderData } = useLoaderData();
 
       return (
             <Suspense fallback={<LoaderOne></LoaderOne>}>
                   <Await resolve={loaderData}>
-                        <OrdersHistoryPage></OrdersHistoryPage>
+                        <ProfilePage></ProfilePage>
                   </Await>
             </Suspense>
       );

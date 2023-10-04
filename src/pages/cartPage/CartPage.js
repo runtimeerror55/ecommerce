@@ -10,6 +10,13 @@ export default function CartPage() {
       if (loaderData.status === "error") {
             return <div>{loaderData.message}</div>;
       }
+      if (loaderData.payload.length === 0) {
+            return (
+                  <div className={styles["empty-cart"]}>
+                        <h2>cart is empty</h2>
+                  </div>
+            );
+      }
 
       return (
             <>

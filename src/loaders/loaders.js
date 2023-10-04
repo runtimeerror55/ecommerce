@@ -41,7 +41,7 @@ export const productsPageLoader = async ({ request }) => {
                               }
                         );
                         const dataTwo = await responseTwo.json();
-                        console.log(dataOne, dataTwo);
+
                         return {
                               loaderOneData: dataOne,
                               loaderTwoData: dataTwo,
@@ -54,9 +54,6 @@ export const productsPageLoader = async ({ request }) => {
 };
 
 export const cartPageLoader = async () => {
-      if (!getToken()) {
-            return redirect("/login");
-      }
       return defer({
             loaderData: (async () => {
                   try {
@@ -69,7 +66,6 @@ export const cartPageLoader = async () => {
                               }
                         );
                         const data = await response.json();
-                        console.log(data);
                         return data;
                   } catch (error) {
                         return { status: "error", message: error.message };
@@ -156,6 +152,47 @@ export const OrderSummaryPageLoader = async () => {
                   } catch (error) {
                         return { status: "error", message: error.message };
                   }
+            })(),
+      });
+};
+
+export const navBarLoader = () => {
+      console.log("navBarLoader");
+
+      return defer({
+            loaderData: (async () => {
+                  try {
+                        const response = await fetch(
+                              `${backEndUrl}account/cart`,
+                              {
+                                    headers: {
+                                          authorization: "Bearer " + getToken(),
+                                    },
+                              }
+                        );
+                        const data = await response.json();
+
+                        return data;
+                  } catch (error) {
+                        return { status: "error", message: error.message };
+                  }
+            })(),
+      });
+};
+
+export const profilePageLoader = () => {
+      if (!getToken()) {
+            return redirect("/login");
+      }
+      return defer({
+            loaderData: (async () => {
+                  const response = await fetch(`${backEndUrl}user`, {
+                        headers: {
+                              authorization: "Bearer " + getToken(),
+                        },
+                  });
+                  const data = await response.json();
+                  return data;
             })(),
       });
 };

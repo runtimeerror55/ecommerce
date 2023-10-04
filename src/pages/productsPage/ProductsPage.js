@@ -6,45 +6,32 @@ import {
       useAsyncValue,
       useFetcher,
 } from "react-router-dom";
-import { useRef, Suspense, useState, useEffect } from "react";
+import { useRef, Suspense, useState, useEffect, useContext } from "react";
 import classes from "./productsPage.module.css";
 import ProductsListing from "./ProductsListing";
 import Filtering from "./Filtering";
 import NavBar from "../../components/navBar/NavBar";
 import { toast } from "react-toastify";
 import { toastOptions } from "../../utilities/utilities";
-import { clear } from "@testing-library/user-event/dist/clear";
 import { PageLandingLoader } from "../../components/loaders/pageLandingLoader";
 import { ToastContainer } from "react-toastify";
+import { searchContext } from "../../context/search";
 
 export default function ProductsPage() {
       const [loaderOneData, setLoaderOneData] = useState(
             useAsyncValue().loaderOneData
       );
-      const searchBarRef = useRef();
+
       const productsFetcher = useFetcher();
       const productsFetcherStatus =
             productsFetcher.state === "idle" && productsFetcher.data;
 
-      const [filterFormValues, setFilterFormValues] = useState(null);
-      const [searchBarValue, setSearchBarValue] = useState("");
+      const { searchBarValue, filterFormValues } = useContext(searchContext);
+
       const [filtersKey, setFiltersKey] = useState(false);
 
       const [showFilterchangeLoader, setShowFilterChangeLoader] =
             useState(false);
-
-      const filterChangeHandler = (event) => {
-            if (event.target.name === "search") {
-                  setSearchBarValue(event.target.value);
-            } else {
-                  setFilterFormValues((previous) => {
-                        return {
-                              ...previous,
-                              [event.target.name]: event.target.value,
-                        };
-                  });
-            }
-      };
 
       useEffect(() => {
             if (searchBarValue !== "") {
@@ -80,6 +67,7 @@ export default function ProductsPage() {
       }, [filterFormValues]);
 
       useEffect(() => {
+            console.log(productsFetcher);
             if (productsFetcherStatus) {
                   const data = productsFetcher.data.data.loaderOneData;
                   console.log(data);
@@ -94,24 +82,20 @@ export default function ProductsPage() {
 
                   setShowFilterChangeLoader(false);
             } else if (productsFetcher.state !== "idle") {
-                  setShowFilterChangeLoader(true);
+                  if (productsFetcher.formAction !== undefined) {
+                        setShowFilterChangeLoader(true);
+                  }
             }
       }, [productsFetcher]);
 
+      if (loaderOneData.status === "error") {
+            return <h2>{loaderOneData.message}</h2>;
+      }
+
       return (
             <>
-                  <ToastContainer></ToastContainer>
-                  <div
-                        method="GET"
-                        action="/products"
-                        onChange={filterChangeHandler}
-                  >
-                        <NavBar ref={searchBarRef}></NavBar>
-                        <Filtering
-                              ref={searchBarRef}
-                              key={filtersKey}
-                        ></Filtering>
-                  </div>
+                  <Filtering key={filtersKey}></Filtering>
+
                   <main className={classes.main}>
                         {showFilterchangeLoader ? (
                               <PageLandingLoader></PageLandingLoader>

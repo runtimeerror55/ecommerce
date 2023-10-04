@@ -7,7 +7,7 @@ const CartProduct = ({ cartProduct }) => {
             <div className={styles.product}>
                   <div>
                         <img
-                              src={laptop}
+                              src={cartProduct.product.image}
                               className={styles["product-image"]}
                         ></img>
                         <h3 className={styles["product-name"]}>

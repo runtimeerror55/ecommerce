@@ -7,7 +7,7 @@ const cartRouter = require("./routes/cart");
 const addressRouter = require("./routes/address");
 const orderRouter = require("./routes/order");
 const authenticationRouter = require("./routes/authentication");
-
+const userRouter = require("./routes/user");
 app.use(
       cors({
             origin: "*",
@@ -42,3 +42,4 @@ app.use("/", homeRouter);
 app.use("/", cartRouter);
 app.use("/", addressRouter);
 app.use("/", orderRouter);
+app.use("/", userRouter);

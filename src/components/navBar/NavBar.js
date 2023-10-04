@@ -1,24 +1,74 @@
 import classes from "./NavBar.module.css";
-import { Link, Outlet, useLoaderData, useSubmit, Form } from "react-router-dom";
-import { useEffect, useRef, useState, forwardRef, useContext } from "react";
+import {
+      Link,
+      Outlet,
+      useLoaderData,
+      Await,
+      useFetcher,
+      useLocation,
+      useNavigate,
+} from "react-router-dom";
+import { forwardRef, useContext, Suspense, useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
       faCartShopping,
       faUser,
       faHouse,
 } from "@fortawesome/free-solid-svg-icons";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { authContext } from "../../context/authentication";
-
+import { toastOptions } from "../../utilities/utilities";
+import { searchContext } from "../../context/search";
 export default forwardRef(function NavBar(props, ref) {
+      const { filterChangeHandler } = useContext(searchContext);
       const { token } = useContext(authContext);
+      const [cartProducts, setCartProducts] = useState([]);
+      const [cartProductsCount, setCartProductsCount] = useState(0);
+      const location = useLocation();
+      const navigate = useNavigate();
+      const cartProductsFetcher = useFetcher();
+      const cartProductsFetcherStatus =
+            cartProductsFetcher.data && cartProductsFetcher.state === "idle";
+      useEffect(() => {
+            console.log("hello");
+            cartProductsFetcher.load("/account/cart");
+      }, [location.pathname]);
+
+      useEffect(() => {
+            if (cartProductsFetcherStatus) {
+                  const data = cartProductsFetcher.data;
+                  if (data.loaderData.status === "success") {
+                        setCartProducts(data.loaderData.payload);
+                  } else {
+                        // toast.error(data.loaderData.message, toastOptions);
+                        setCartProductsCount(0);
+                  }
+            }
+      }, [cartProductsFetcher]);
+
+      useEffect(() => {
+            const count = cartProducts.reduce((total, current) => {
+                  return total + current.quantity;
+            }, 0);
+            setCartProductsCount(count);
+      }, [cartProducts]);
+
+      const searchChangeHandler = (event) => {
+            console.log(location);
+            filterChangeHandler(event);
+            if (location.pathname !== "/products") {
+                  navigate(`/products/?search=${event.target.value}`);
+            }
+      };
+
       return (
             <>
                   <nav className={classes["nav-bar"]}>
                         <h1 className={classes.logo}>ELECTRO</h1>
 
                         <input
+                              onChange={searchChangeHandler}
                               ref={ref}
                               className={classes["search-bar"]}
                               placeholder="search products"
@@ -46,7 +96,7 @@ export default forwardRef(function NavBar(props, ref) {
                                                 classes["cart-items-count"]
                                           }
                                     >
-                                          {0}
+                                          {token ? cartProductsCount : 0}
                                     </span>
                               </Link>
                               {token ? (

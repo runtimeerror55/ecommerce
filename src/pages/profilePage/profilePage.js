@@ -1,18 +1,24 @@
 import { useContext } from "react";
 import styles from "./profilePage.module.css";
 import { authContext } from "../../context/authentication";
-import { useNavigate } from "react-router-dom";
+import { useAsyncValue, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { toastOptions } from "../../utilities/utilities";
 
 export const ProfilePage = () => {
-      const email = "aakashdeep954@gamil.com";
-      const name = "aakash";
+      const loaderData = useAsyncValue();
       const { logout } = useContext(authContext);
+
       const navigate = useNavigate();
       const logoutButtonClickHandler = () => {
             logout();
             navigate("/");
       };
 
+      if (loaderData.status === "error") {
+            console.log("hello");
+            return "";
+      }
       return (
             <>
                   <div className={styles["option-data"]}>
@@ -21,13 +27,13 @@ export const ProfilePage = () => {
                                     <span className={styles["label"]}>
                                           Email:
                                     </span>
-                                    <span>{email}</span>
+                                    <span>{loaderData.payload.email}</span>
                               </div>
                               <div className={styles["user-detail"]}>
                                     <span className={styles["label"]}>
                                           name:
                                     </span>
-                                    <span>{name}</span>
+                                    <span>{loaderData.payload.name}</span>
                               </div>
                         </div>
                         <button

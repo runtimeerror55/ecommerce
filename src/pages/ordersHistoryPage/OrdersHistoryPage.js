@@ -8,7 +8,7 @@ import styles from "./ordersHistoryPage.module.css";
 
 const OrdersHistoryPage = () => {
       const loaderData = useAsyncValue();
-      console.log(loaderData);
+
       return (
             <>
                   <div className={styles["option-data"]}>
