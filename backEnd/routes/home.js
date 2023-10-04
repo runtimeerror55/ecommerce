@@ -42,13 +42,11 @@ router.route("/").get(async (request, response) => {
                   });
             }
 
-            setTimeout(() => {
-                  response.status(200).json({
-                        status: "success",
-                        message: "fetched successfully",
-                        payload: products,
-                  });
-            }, 1000);
+            response.status(200).json({
+                  status: "success",
+                  message: "fetched successfully",
+                  payload: products,
+            });
       } catch (error) {
             response
                   .status(500)

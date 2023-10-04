@@ -14,13 +14,12 @@ router.route("/account/addresses")
                   if (!addressHistory) {
                         addressHistory = { addresses: [] };
                   }
-                  setTimeout(() => {
-                        response.status(200).json({
-                              status: "success",
-                              message: "fetched successfully",
-                              payload: addressHistory,
-                        });
-                  }, 1000);
+
+                  response.status(200).json({
+                        status: "success",
+                        message: "fetched successfully",
+                        payload: addressHistory,
+                  });
             } catch (error) {
                   response
                         .status(500)
@@ -49,12 +48,10 @@ router.route("/account/addresses")
                         await addressHistory.save();
                   }
 
-                  setTimeout(() => {
-                        response.status(200).json({
-                              status: "success",
-                              message: "added the address",
-                        });
-                  }, 1000);
+                  response.status(200).json({
+                        status: "success",
+                        message: "added the address",
+                  });
             } catch (error) {
                   response
                         .status(500)
@@ -88,12 +85,10 @@ router.route("/account/addresses/:id")
                         }
                   );
 
-                  setTimeout(() => {
-                        response.status(200).json({
-                              status: "success",
-                              message: "deleted the address",
-                        });
-                  }, 1000);
+                  response.status(200).json({
+                        status: "success",
+                        message: "deleted the address",
+                  });
             } catch (error) {
                   response
                         .status(500)
@@ -117,12 +112,11 @@ router.route("/account/addresses/:id")
                         request.params.id,
                         request.body
                   );
-                  setTimeout(() => {
-                        response.status(200).json({
-                              status: "success",
-                              message: "edited the address",
-                        });
-                  }, 1000);
+
+                  response.status(200).json({
+                        status: "success",
+                        message: "edited the address",
+                  });
             } catch (error) {
                   response
                         .status(500)

@@ -19,13 +19,11 @@ router.route("/account/cart").get(isLoggedIn, async (request, response) => {
                   cartProducts = cart.cartProducts;
             }
 
-            setTimeout(() => {
-                  response.json({
-                        status: "success",
-                        message: "fetched cart successfully",
-                        payload: cartProducts,
-                  });
-            }, 1000);
+            response.json({
+                  status: "success",
+                  message: "fetched cart successfully",
+                  payload: cartProducts,
+            });
       } catch (error) {
             response
                   .status(500)
@@ -77,12 +75,11 @@ router.route("/account/cart/:id")
                               await cart.save();
                         }
                   }
-                  setTimeout(() => {
-                        response.status(200).json({
-                              status: "success",
-                              message: "added to the cart",
-                        });
-                  }, 1000);
+
+                  response.status(200).json({
+                        status: "success",
+                        message: "added to the cart",
+                  });
             } catch (error) {
                   response
                         .status(500)
@@ -125,12 +122,10 @@ router.route("/account/cart/:id")
                         }
                   }
 
-                  setTimeout(() => {
-                        response.status(200).json({
-                              status: "success",
-                              message: "deleted from cart",
-                        });
-                  }, 1000);
+                  response.status(200).json({
+                        status: "success",
+                        message: "deleted from cart",
+                  });
             } catch (error) {
                   response
                         .status(500)

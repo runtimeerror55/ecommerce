@@ -14,13 +14,12 @@ router.route("/account/orders")
                   if (!orderHistory) {
                         orderHistory = { orders: [] };
                   }
-                  setTimeout(() => {
-                        response.status(200).json({
-                              status: "success",
-                              message: "fetched successfully",
-                              payload: orderHistory,
-                        });
-                  }, 1000);
+
+                  response.status(200).json({
+                        status: "success",
+                        message: "fetched successfully",
+                        payload: orderHistory,
+                  });
             } catch (error) {
                   response
                         .status(500)

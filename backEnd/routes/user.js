@@ -9,13 +9,11 @@ router.route("/user").get(isLoggedIn, async (request, response) => {
                   _id: request.user._id,
             });
 
-            setTimeout(() => {
-                  response.status(200).json({
-                        status: "success",
-                        message: "fetched successfully",
-                        payload: { email, name },
-                  });
-            }, 1000);
+            response.status(200).json({
+                  status: "success",
+                  message: "fetched successfully",
+                  payload: { email, name },
+            });
       } catch (error) {
             response
                   .status(500)
