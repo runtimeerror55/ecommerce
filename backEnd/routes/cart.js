@@ -108,7 +108,7 @@ router.route("/account/cart/:id")
                                     {
                                           $pull: {
                                                 cartProducts: {
-                                                      $in: cartProduct._id,
+                                                      _id: cartProduct._id,
                                                 },
                                           },
                                     }

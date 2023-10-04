@@ -92,6 +92,9 @@
       color: white;
       margin: 3px;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 }
 
 .cart-price-details {
@@ -161,8 +164,8 @@ hr {
       .info {
             font-size: 14px;
       }
-      /* .add-to-cart-button,
+      .add-to-cart-button,
       .remove-from-cart-button {
             width: 30px;
-      } */
+      }
 }
