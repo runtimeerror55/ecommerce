@@ -18,9 +18,10 @@ export const AuthProvider = ({ children }) => {
             setToken(data.payload.token);
             setUser(data.payload.user);
             localStorage.setItem("token", JSON.stringify(data.payload.token));
-            setTimeout(() => {
-                  logout();
-            }, data.payload.expiresAt * 1000 - Date.now());
+            console.log((data.payload.expiresAt - Date.now() / 1000) / 3600);
+            // setTimeout(() => {
+            //       logout();
+            // }, data.payload.expiresAt * 1000 - Date.now());
       };
 
       useEffect(() => {
@@ -28,15 +29,19 @@ export const AuthProvider = ({ children }) => {
                   const isMyTokenExpired = isExpired(token);
                   const user = decodeToken(token);
 
+                  console.log(user.exp * 1000 - Date.now());
                   if (isMyTokenExpired) {
                         logout();
                   } else {
-                        setTimeout(() => {
+                        const id = setTimeout(() => {
                               logout();
                         }, user.exp * 1000 - Date.now());
+                        return () => {
+                              clearTimeout(id);
+                        };
                   }
             }
-      }, []);
+      }, [token]);
       return (
             <authContext.Provider
                   value={{

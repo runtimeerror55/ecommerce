@@ -13,7 +13,7 @@ const AddressesPage = () => {
       return (
             <>
                   <div className={styles["option-data"]}>
-                        {loaderData.payload.addresses?.map((address) => {
+                        {loaderData?.payload?.addresses?.map((address) => {
                               return (
                                     <Address
                                           key={address._id}

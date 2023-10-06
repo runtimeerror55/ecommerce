@@ -12,7 +12,7 @@ const OrdersHistoryPage = () => {
       return (
             <>
                   <div className={styles["option-data"]}>
-                        {loaderData.payload.orders.map((order) => {
+                        {loaderData?.payload?.orders.map((order) => {
                               return (
                                     <Link to={`/account/orders/${order._id}`}>
                                           <div className={styles.order}>

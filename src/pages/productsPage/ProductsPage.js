@@ -47,7 +47,7 @@ export default function ProductsPage() {
                         setFiltersKey((previous) => {
                               return !previous;
                         });
-                  }, 500);
+                  }, 1000);
                   return () => {
                         clearTimeout(id);
                   };
@@ -79,7 +79,6 @@ export default function ProductsPage() {
                         setLoaderOneData(
                               productsFetcher.data.data.loaderOneData
                         );
-                        toast.success(data.message, toastOptions);
                   } else {
                         toast.error(data.message, toastOptions);
                   }

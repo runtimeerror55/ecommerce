@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const UserModel = require("./models/userModel");
 module.exports.isLoggedIn = async (request, response, next) => {
       try {
             const token = request.headers.authorization.split(" ")[1];
@@ -15,8 +16,18 @@ module.exports.isLoggedIn = async (request, response, next) => {
                               message: "not a valid token",
                         });
                   } else {
-                        request.user = decodedToken;
-                        next();
+                        const isUserExist = await UserModel.findById(
+                              decodedToken._id
+                        );
+                        if (!isUserExist) {
+                              response.status(500).json({
+                                    status: "error",
+                                    message: "user does not exist ,logout and login again",
+                              });
+                        } else {
+                              request.user = decodedToken;
+                              next();
+                        }
                   }
             }
       } catch (error) {

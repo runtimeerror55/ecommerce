@@ -15,10 +15,6 @@ export const ProfilePage = () => {
             navigate("/");
       };
 
-      if (loaderData.status === "error") {
-            console.log("hello");
-            return "";
-      }
       return (
             <>
                   <div className={styles["option-data"]}>
@@ -27,13 +23,13 @@ export const ProfilePage = () => {
                                     <span className={styles["label"]}>
                                           Email:
                                     </span>
-                                    <span>{loaderData.payload.email}</span>
+                                    <span>{loaderData?.payload?.email}</span>
                               </div>
                               <div className={styles["user-detail"]}>
                                     <span className={styles["label"]}>
                                           name:
                                     </span>
-                                    <span>{loaderData.payload.name}</span>
+                                    <span>{loaderData?.payload?.name}</span>
                               </div>
                         </div>
                         <button

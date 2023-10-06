@@ -7,12 +7,17 @@ import CartPriceDetails from "./CartPriceDetails";
 
 export default function CartPage() {
       const loaderData = useAsyncValue();
+      console.log(loaderData);
       if (loaderData.status === "error") {
-            return <div>{loaderData.message}</div>;
+            return (
+                  <div className={styles["error"]}>
+                        <h2>{loaderData.message}</h2>{" "}
+                  </div>
+            );
       }
       if (loaderData.payload.length === 0) {
             return (
-                  <div className={styles["empty-cart"]}>
+                  <div className={styles["error"]}>
                         <h2>cart is empty</h2>
                   </div>
             );
