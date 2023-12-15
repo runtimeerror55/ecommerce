@@ -1,5 +1,10 @@
 # ecommerce
 
+## to do
+
+1. filter values should be reset when navigating to differenet url
+2. not able to select address at the checkout
+
 ## Tech stack
 
 - Html

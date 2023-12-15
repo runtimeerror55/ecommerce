@@ -1,25 +1,51 @@
-import { forwardRef, useContext } from "react";
+import { forwardRef, useContext, useEffect, useState } from "react";
 import classes from "./productsPage.module.css";
 import { searchContext } from "../../context/search";
+import { defaultFilterValues } from "../../utilities/utilities";
 const Filtering = forwardRef((props, ref) => {
-      const { filterChangeHandler } = useContext(searchContext);
+      useContext(searchContext);
+
+      const filterChangeHandler = (event) => {
+            props.setFilterFormValues((previous) => {
+                  if (event.target.name !== "page") {
+                        return {
+                              ...previous,
+                              [event.target.name]: event.target.value,
+                              page: 0,
+                        };
+                  }
+                  return {
+                        ...previous,
+                        page: +event.target.value,
+                  };
+            });
+      };
       return (
             <section
                   className={classes["filtering-section"]}
-                  onChange={filterChangeHandler}
+                  onChange={(event) => {
+                        filterChangeHandler(event);
+                  }}
             >
                   <div className={classes["filtering-form"]}>
-                        <select name="category">
-                              <option value="" disabled selected>
+                        <select
+                              name="category"
+                              value={props.filterFormValues.category}
+                        >
+                              <option value="" disabled>
                                     CATEGORIES
                               </option>
                               <option value="Mobiles">Mobiles</option>
                               <option value="Laptops">Laptops</option>
                               <option value="Monitors">Monitors</option>
+                              <option value="all">all</option>
                         </select>
 
-                        <select name="brand">
-                              <option value="" disabled selected>
+                        <select
+                              name="brand"
+                              value={props.filterFormValues.brand}
+                        >
+                              <option value="" disabled>
                                     Brand
                               </option>
                               <option value="Asus">Asus</option>
@@ -27,9 +53,13 @@ const Filtering = forwardRef((props, ref) => {
                               <option value="Dell">Dell</option>
                               <option value="Acer">Acer</option>
                               <option value="Razer">Razer</option>
+                              <option value="all">all</option>
                         </select>
-                        <select name="price">
-                              <option value="" disabled selected>
+                        <select
+                              name="price"
+                              value={props.filterFormValues.price}
+                        >
+                              <option value="" disabled>
                                     PRICE
                               </option>
                               <option value="4000">upto $ 4000</option>
@@ -37,19 +67,66 @@ const Filtering = forwardRef((props, ref) => {
                               <option value="2000">upto $ 2000</option>
                               <option value="1000">upto $ 1000</option>
                         </select>
-                        <select name="cpuBrand">
-                              <option value="" disabled selected>
+                        <select
+                              name="cpuBrand"
+                              value={props.filterFormValues.cpuBrand}
+                        >
+                              <option value="" disabled>
                                     CPU
                               </option>
                               <option value="Amd">Amd</option>
 
                               <option value="Intel">Intel</option>
+                              <option value="all">all</option>
+                        </select>
+                        <select name="page" value={props.filterFormValues.page}>
+                              <option value="" disabled>
+                                    PAGE
+                              </option>
+
+                              {(() => {
+                                    const pages = [];
+                                    for (
+                                          let i = 0;
+                                          i <= +props.filterFormValues.page + 1;
+                                          i++
+                                    ) {
+                                          if (
+                                                i ===
+                                                +props.filterFormValues.page + 1
+                                          ) {
+                                                console.log(
+                                                      props.loaderOneData
+                                                );
+                                                if (
+                                                      props.loaderOneData
+                                                            .payload.length ===
+                                                      10
+                                                ) {
+                                                      pages.push(
+                                                            <option value={i}>
+                                                                  page {i + 1}
+                                                            </option>
+                                                      );
+                                                }
+                                          } else {
+                                                pages.push(
+                                                      <option value={i}>
+                                                            page {i + 1}
+                                                      </option>
+                                                );
+                                          }
+                                    }
+                                    return pages;
+                              })()}
                         </select>
 
-                        <select name="sort" className={classes["sort-filter"]}>
-                              <option value="" disabled selected>
-                                    sortby
-                              </option>
+                        <select
+                              name="sort"
+                              className={classes["sort-filter"]}
+                              value={props.filterFormValues.sort}
+                        >
+                              <option disabled>sortby</option>
                               <option value="1">price low to high</option>
 
                               <option value="-1">price high to low</option>

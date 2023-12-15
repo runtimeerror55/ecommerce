@@ -7,17 +7,22 @@ router.route("/").get(async (request, response) => {
       try {
             const query = Object.entries(request.query);
             const finalQuery = {};
+            const perPageItems = 10;
+            let page = 0;
             let sort = "";
             let search = undefined;
             for (let [key, value] of query) {
-                  if (key != "sort") {
-                        if (key == "price") {
+                  if (key !== "sort") {
+                        if (key === "price") {
                               finalQuery.price = { $lte: value };
                         } else {
-                              if (key !== "search") {
-                                    finalQuery[key] = value;
-                              } else {
+                              if (key === "search") {
                                     search = value;
+                              } else if (key === "page") {
+                                    page = value;
+                              } else if (value === "all") {
+                              } else {
+                                    finalQuery[key] = value;
                               }
                         }
                   } else {
@@ -33,13 +38,19 @@ router.route("/").get(async (request, response) => {
                               $options: "i",
                         },
                         ...finalQuery,
-                  }).sort({
-                        price: sort,
-                  });
+                  })
+                        .sort({
+                              price: sort,
+                        })
+                        .skip(perPageItems * page)
+                        .limit(perPageItems);
             } else {
-                  products = await ProductModel.find(finalQuery).sort({
-                        price: sort,
-                  });
+                  products = await ProductModel.find(finalQuery)
+                        .sort({
+                              price: sort,
+                        })
+                        .skip(perPageItems * page)
+                        .limit(perPageItems);
             }
 
             response.status(200).json({

@@ -16,18 +16,21 @@ import { toastOptions } from "../../utilities/utilities";
 import { PageLandingLoader } from "../../components/loaders/pageLandingLoader";
 import { ToastContainer } from "react-toastify";
 import { searchContext } from "../../context/search";
+import { defaultFilterValues } from "../../utilities/utilities";
 
 export default function ProductsPage() {
       const [loaderOneData, setLoaderOneData] = useState(
             useAsyncValue().loaderOneData
       );
+      const [filterFormValues, setFilterFormValues] =
+            useState(defaultFilterValues);
 
-      console.log(useAsyncValue());
       const productsFetcher = useFetcher();
       const productsFetcherStatus =
             productsFetcher.state === "idle" && productsFetcher.data;
 
-      const { searchBarValue, filterFormValues } = useContext(searchContext);
+      const { searchBarValue } = useContext(searchContext);
+      const [loaded, setLoaded] = useState(false);
 
       const [filtersKey, setFiltersKey] = useState(false);
       const [flag, setFlag] = useState(false);
@@ -36,6 +39,7 @@ export default function ProductsPage() {
 
       useEffect(() => {
             if (searchBarValue !== "" && flag) {
+                  setFilterFormValues(defaultFilterValues);
                   const id = setTimeout(() => {
                         productsFetcher.submit(
                               { search: searchBarValue },
@@ -58,7 +62,7 @@ export default function ProductsPage() {
       }, [searchBarValue]);
 
       useEffect(() => {
-            if (filterFormValues !== null) {
+            if (loaded) {
                   productsFetcher.submit(
                         { ...filterFormValues, search: searchBarValue },
                         {
@@ -67,6 +71,9 @@ export default function ProductsPage() {
                         }
                   );
                   console.log("yess");
+            }
+            if (!loaded) {
+                  setLoaded(true);
             }
       }, [filterFormValues]);
 
@@ -97,7 +104,12 @@ export default function ProductsPage() {
 
       return (
             <>
-                  <Filtering key={filtersKey}></Filtering>
+                  <Filtering
+                        key={filtersKey}
+                        loaderOneData={loaderOneData}
+                        setFilterFormValues={setFilterFormValues}
+                        filterFormValues={filterFormValues}
+                  ></Filtering>
 
                   <main className={classes.main}>
                         {showFilterchangeLoader ? (

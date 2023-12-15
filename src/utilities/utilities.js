@@ -29,3 +29,12 @@ export const colorRingOptions = {
       wrapperClass: "blocks-wrapper",
       colors: ["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"],
 };
+
+export const defaultFilterValues = {
+      brand: "all",
+      price: "4000",
+      sort: "1",
+      cpuBrand: "all",
+      category: "all",
+      page: "0",
+};

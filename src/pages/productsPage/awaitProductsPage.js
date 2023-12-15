@@ -7,6 +7,7 @@ import { Await, useLoaderData } from "react-router-dom";
 export const AwaitProductsPage = () => {
       const { data } = useLoaderData();
 
+      console.log(data);
       return (
             <Suspense fallback={<PageLandingLoader></PageLandingLoader>}>
                   <Await resolve={data}>
