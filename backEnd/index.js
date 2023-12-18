@@ -8,11 +8,6 @@ const addressRouter = require("./routes/address");
 const orderRouter = require("./routes/order");
 const authenticationRouter = require("./routes/authentication");
 const userRouter = require("./routes/user");
-app.use(
-      cors({
-            origin: "*",
-      })
-);
 
 // .connect(
 //     "mongodb+srv://aakashdeep954:a1S6mNXvLK0b158x@portfoliocluster.c1qp6ud.mongodb.net/ecommerce?retryWrites=true&w=majority"

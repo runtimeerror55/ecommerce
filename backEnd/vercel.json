@@ -15,7 +15,7 @@
                         },
                         {
                               "key": "Access-Control-Allow-Origin",
-                              "value": "https://techtotube.vercel.app"
+                              "value": "https://ecommerce-fawn-pi-63.vercel.app"
                         },
                         {
                               "key": "Access-Control-Allow-Methods",
