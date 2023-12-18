@@ -6,7 +6,7 @@ export const ErrorPage = () => {
       console.error(error);
       return (
             <main className={styles["main"]}>
-                  <h1>{"hello"}</h1>
+                  <h1>{error.message}</h1>
             </main>
       );
 };
