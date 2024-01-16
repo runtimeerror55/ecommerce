@@ -7,6 +7,16 @@
 <h3>Introduction</h3>
 <p>A web based electronics shopping app. Experience shopping like never before. Shop for your favourite mobiles,laptops etc</p>
 
+<h3>Media</h3>
+<div >
+    <img width="400" src="https://res.cloudinary.com/diwrxz82u/image/upload/v1704826201/ecommerce/one_op1q9q.png" alt="project" >
+    <img width="400" src="https://res.cloudinary.com/diwrxz82u/image/upload/v1704826204/ecommerce/two_zc2c0r.png" alt="project" >
+    <img width="400" src="https://res.cloudinary.com/diwrxz82u/image/upload/v1704826208/ecommerce/three_sc0usr.png" alt="project" >
+    <img width="400" src="https://res.cloudinary.com/diwrxz82u/image/upload/v1704826215/ecommerce/four_rztsw9.png" alt="project" >
+    <img width="400" src="https://res.cloudinary.com/diwrxz82u/image/upload/v1704826222/ecommerce/five_lygyci.png" alt="project" >
+    <img  width="400" src="https://res.cloudinary.com/diwrxz82u/image/upload/v1704826232/ecommerce/six_qkljad.png" alt="project" >
+    <img width="400" src="https://res.cloudinary.com/diwrxz82u/image/upload/v1704826239/ecommerce/seven_xndyzq.png" alt="project" >
+  </div>
 <h3>key functionalities</h3>
 <ul>
   <li>add product to cart</li>
