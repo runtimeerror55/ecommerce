@@ -1,41 +1,38 @@
-# ecommerce
+<h2 align="center">Ecommerce</h2>
 
 ## to do
 
 2. not able to select address at the checkout
 
-## Tech stack
+<h3>Introduction</h3>
+<p>A web based electronics shopping app. Experience shopping like never before. Shop for your favourite mobiles,laptops etc</p>
 
-- Html
-- css
-- javascript
-- react
-- express
-- mongodb
+<h3>key functionalities</h3>
+<ul>
+  <li>add product to cart</li>
+  <li>delete product from cart</li>
+  <li>add address</li><li>edit address</li>
+  <li>delete address</li><li>place an order</li>
+  <li>filter products</li><li>searching products using the title</li>
+  <li>pagination</li>
+  <li>loading state for all the functionalities</li>
+  <li>error handling for all the functionalities (frontend and backEnd)</li>
+  <li>notifications for all the functionalities</li>
+  <li>authentication</li>
+</ul>
 
-## Pages
-
-1. Landing page
-2. products page
-3. cart page
-4. order summary page
-5. profile page
-6. orders history page
-7. addresses page
-8. login page
-9. register page
-
-## functionalities
-
-1. add product to cart
-2. delete product from cart
-3. add address
-4. edit address
-5. delete address
-6. place an order
-7. filter products
-8. searching products using the title with debounce
-9. loading state for all the functionalities
-10. error handling for all the functionalities (frontend and backEnd)
-11. notifications for all the functionalities
-12. authentication
+<h3>Lannguages and tools used:</h3>
+<ul>
+  <li>html</li>
+  <li>javscript</li>
+  <li>css</li>
+  <li>react</li>
+  <li>express</li>
+  <li>mongoose</li>
+  <li>bcrypt</li>
+  <li>jsonwebtoken</li>
+  <li>react-jwt</li>
+  <li>react-loader-spinner</li>
+  <li>react-router-dom</li>
+  <li>react-toastify</li>
+</ul>
