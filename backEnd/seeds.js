@@ -4,15 +4,12 @@ const OrderModel = require("./models/order");
 const CartModel = require("./models/cart");
 const CartProductModel = require("./models/cartProduct");
 const OrderHistoryModel = require("./models/orderHistory");
-// .connect("mongodb://127.0.0.1:27017/ecommerce")
-// .connect(
-//     "mongodb+srv://aakashdeep954:a1S6mNXvLK0b158x@portfoliocluster.c1qp6ud.mongodb.net/ecommerce?retryWrites=true&w=majority"
-// )
 
+if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+      require("dotenv").config({ path: __dirname + "\\.env" });
+}
 mongoose
-      .connect(
-            "mongodb+srv://aakashdeep954:a1S6mNXvLK0b158x@portfoliocluster.c1qp6ud.mongodb.net/ecommerce?retryWrites=true&w=majority"
-      )
+      .connect(process.env.hosted_db_url)
       .then(() => {
             console.log("connected to mongodb");
       })
