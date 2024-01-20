@@ -8,7 +8,6 @@ const addressRouter = require("./routes/address");
 const orderRouter = require("./routes/order");
 const authenticationRouter = require("./routes/authentication");
 const userRouter = require("./routes/user");
-require("dotenv").config();
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
       require("dotenv").config({ path: __dirname + "\\.env" });
