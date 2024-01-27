@@ -62,7 +62,7 @@
 }
 .product-quantity {
       text-align: center;
-      font-size: 25px;
+      font-size: 1.5em;
       font-weight: bold;
       margin: 2px;
 }
@@ -140,7 +140,7 @@ hr {
       cursor: pointer;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 800px) {
       .main {
             flex-direction: column;
       }
@@ -159,13 +159,16 @@ hr {
             width: 120px;
       }
       .product-name {
-            font-size: 18px;
+            font-size: 1em;
       }
       .info {
-            font-size: 14px;
+            font-size: 0.8em;
       }
       .add-to-cart-button,
       .remove-from-cart-button {
             width: 30px;
+      }
+      .product-quantity {
+            font-size: 1.2em;
       }
 }

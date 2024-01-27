@@ -13,9 +13,9 @@ const CartProduct = ({ cartProduct }) => {
                         ></img>
 
                         <div className={styles["product-information"]}>
-                              <h2 className={styles["product-name"]}>
+                              <h3 className={styles["product-name"]}>
                                     <i>{cartProduct.product.name}</i>
-                              </h2>
+                              </h3>
                               <div className={styles["container-one"]}>
                                     <div className={styles["container-two"]}>
                                           <div>
