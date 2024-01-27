@@ -39,6 +39,11 @@ select {
       color: black;
       margin: 5px;
       border: 1px solid black;
+      text-align: center;
+}
+
+option {
+      text-align: start;
 }
 
 .sort-filter {
@@ -110,7 +115,7 @@ select {
       background-color: green;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 800px) {
       .product {
             padding-left: 0;
             padding-right: 0;
@@ -120,14 +125,27 @@ select {
             width: 120px;
       }
       .product-name {
-            font-size: 18px;
+            font-size: 1em;
       }
       .add-to-cart-button,
       .cart-link {
-            width: 80px;
-            height: 25px;
+            width: 70px;
+            height: 22px;
+      }
+      .add-to-cart-button {
+            font-size: 0.8em;
       }
       .info {
-            font-size: 14px;
+            font-size: 0.8em;
+      }
+      .product-price {
+            font-size: 1.1em;
+      }
+      select {
+            padding-left: 8px;
+            padding-right: 8px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            font-size: 0.8em;
       }
 }

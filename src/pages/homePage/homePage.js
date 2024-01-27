@@ -26,7 +26,7 @@ const HomePage = () => {
                   </section>
                   <section className={styles.advantages}>
                         <div>
-                              <h1>Why us</h1>
+                              <h2>Why us</h2>
                               <div className={styles.advantage}>
                                     <FontAwesomeIcon icon={faTruck} />
                                     Express Delivery
@@ -42,7 +42,7 @@ const HomePage = () => {
                         </div>
 
                         <div>
-                              <h1>Payments accepted</h1>
+                              <h2>Payments accepted</h2>
                               <div className={styles.advantage}>
                                     <FontAwesomeIcon icon={faCreditCard} />
                                     Credit card
@@ -59,9 +59,9 @@ const HomePage = () => {
                   </section>
                   <footer className={styles.footer}>
                         <div className={styles.type}>
-                              <h2 className={styles["type-heading"]}>
+                              <b className={styles["type-heading"]}>
                                     Quick links
-                              </h2>
+                              </b>
                               <Link className={styles["quick-link"]}>Home</Link>
                               <Link className={styles["quick-link"]}>Cart</Link>
                               <Link className={styles["quick-link"]}>
@@ -72,7 +72,7 @@ const HomePage = () => {
                               </Link>
                         </div>
                         <div className={styles.type}>
-                              <h2 className={styles["type-heading"]}>About</h2>
+                              <b className={styles["type-heading"]}>About</b>
                               <Link className={styles["quick-link"]}>
                                     contact us
                               </Link>
@@ -87,7 +87,7 @@ const HomePage = () => {
                               </Link>
                         </div>
                         <div className={styles.type}>
-                              <h2 className={styles["type-heading"]}>Social</h2>
+                              <b className={styles["type-heading"]}>Social</b>
                               <Link className={styles["quick-link"]}>
                                     Twitter
                               </Link>
@@ -102,9 +102,7 @@ const HomePage = () => {
                               </Link>
                         </div>
                         <div className={styles.type}>
-                              <h2 className={styles["type-heading"]}>
-                                    Office Address
-                              </h2>
+                              <b className={styles["type-heading"]}>Address</b>
                               <div>
                                     road no 3, venkateshwara colony<br></br>
                                     hyderabad<br></br>

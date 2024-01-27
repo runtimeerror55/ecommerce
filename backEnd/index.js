@@ -11,6 +11,7 @@ const userRouter = require("./routes/user");
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
       require("dotenv").config({ path: __dirname + "\\.env" });
+      app.use(cors("*"));
 }
 mongoose
       .connect(process.env.hosted_db_url)

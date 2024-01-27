@@ -27,9 +27,9 @@ const Product = ({ product }) => {
                         ></img>
 
                         <div className={classes["product-information"]}>
-                              <h2 className={classes["product-name"]}>
+                              <h3 className={classes["product-name"]}>
                                     <i>{product.name}</i>
-                              </h2>
+                              </h3>
                               <div>
                                     <i className={classes["info"]}>
                                           {product.cpu}
