@@ -35,9 +35,8 @@ const Filtering = forwardRef((props, ref) => {
                               <option value="" disabled>
                                     CATEGORIES
                               </option>
-                              <option value="Mobiles">Mobiles</option>
-                              <option value="Laptops">Laptops</option>
-                              <option value="Monitors">Monitors</option>
+                              <option value="mobiles">Mobiles</option>
+                              <option value="laptops">Laptops</option>
                               <option value="all">all</option>
                         </select>
 

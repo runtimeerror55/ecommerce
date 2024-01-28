@@ -74,9 +74,14 @@ option {
       flex-grow: 1;
 }
 
-.product-image {
+.product-image-container {
       width: 200px;
+}
+
+.product-image {
+      max-width: 200px;
       height: fit-content;
+      max-height: 150px;
 }
 .product-name {
       margin-bottom: 3px;

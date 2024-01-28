@@ -20,11 +20,13 @@ const Product = ({ product }) => {
       return (
             <div className={classes.product}>
                   <div className={classes["product-image-and-info"]}>
-                        <img
-                              src={product.image}
-                              className={classes["product-image"]}
-                              alt={product.name}
-                        ></img>
+                        <div className={classes["product-image-container"]}>
+                              <img
+                                    src={product.image}
+                                    className={classes["product-image"]}
+                                    alt={product.name}
+                              ></img>
+                        </div>
 
                         <div className={classes["product-information"]}>
                               <h3 className={classes["product-name"]}>
