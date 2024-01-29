@@ -127,10 +127,13 @@ option {
             margin: 10px;
       }
       .product-image {
-            width: 120px;
+            max-width: 120px;
       }
       .product-name {
             font-size: 1em;
+      }
+      .product-information {
+            margin-left: 10px;
       }
       .add-to-cart-button,
       .cart-link {
@@ -144,6 +147,9 @@ option {
       }
       .product-price {
             font-size: 1.1em;
+      }
+      .product-image-container {
+            width: 120px;
       }
       select {
             padding-left: 8px;
