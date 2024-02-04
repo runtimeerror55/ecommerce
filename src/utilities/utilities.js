@@ -38,3 +38,12 @@ export const defaultFilterValues = {
       category: "all",
       page: "0",
 };
+
+export const populateFilersOptions = (filters, products) => {
+      for (let filter of Object.keys(filters)) {
+            for (let product of products) {
+                  console.log(product.brand);
+                  filters[filter].add(product[filter]);
+            }
+      }
+};

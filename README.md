@@ -1,9 +1,5 @@
 <h2 align="center">Ecommerce</h2>
 
-## to do
-
-2. not able to select address at the checkout
-
 <h3>Introduction</h3>
 <p>A web based electronics shopping app. Experience shopping like never before. Shop for your favourite mobiles,laptops etc</p>
 

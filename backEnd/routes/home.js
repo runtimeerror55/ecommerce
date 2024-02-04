@@ -3,18 +3,36 @@ const router = express.Router();
 const ProductModel = require("../models/product");
 
 router.route("/").get(async (request, response) => {
-      console.log("one");
       try {
+            const populateFilersOptions = (filters, products) => {
+                  for (let filter of Object.keys(filters)) {
+                        let newSet = new Set();
+                        for (let product of products) {
+                              newSet.add(product[filter]);
+                        }
+                        filters[filter].push(...newSet);
+                  }
+            };
+            let allFilters = {
+                  category: [],
+                  brand: [],
+                  cpuBrand: [],
+            };
             const query = Object.entries(request.query);
             const finalQuery = {};
             const perPageItems = 10;
             let page = 0;
             let sort = "";
             let search = undefined;
+            let filters = "false";
+            let isFirst = true;
             for (let [key, value] of query) {
-                  if (key !== "sort") {
+                  isFirst = false;
+                  if (key === "filters") {
+                        filters = value;
+                  } else if (key !== "sort") {
                         if (key === "price") {
-                              finalQuery.price = { $lte: value };
+                              finalQuery.price = { $lte: +value };
                         } else {
                               if (key === "search") {
                                     search = value;
@@ -30,33 +48,143 @@ router.route("/").get(async (request, response) => {
                   }
             }
 
+            if (isFirst) {
+                  filters = "true";
+            }
+
             let products = [];
+            let payload = {};
+
             if (search !== "" && search !== undefined) {
-                  products = await ProductModel.find({
-                        name: {
-                              $regex: new RegExp([...search].join(".*?")),
-                              $options: "i",
-                        },
-                        ...finalQuery,
-                  })
-                        .sort({
+                  if (filters === "true") {
+                        let products = await ProductModel.find({
+                              name: {
+                                    $regex: new RegExp([...search].join(".*?")),
+                                    $options: "i",
+                              },
+                              ...finalQuery,
+                        }).sort({
                               price: sort,
+                        });
+
+                        populateFilersOptions(allFilters, products);
+                        payload = {
+                              products: products.slice(0, perPageItems),
+                              filters: allFilters,
+                              count: products.length,
+                        };
+                  } else {
+                        products = await ProductModel.find({
+                              name: {
+                                    $regex: new RegExp([...search].join(".*?")),
+                                    $options: "i",
+                              },
+                              ...finalQuery,
                         })
-                        .skip(perPageItems * page)
-                        .limit(perPageItems);
+                              .sort({
+                                    price: sort,
+                              })
+                              .skip(perPageItems * page)
+                              .limit(perPageItems);
+
+                        let result = await ProductModel.aggregate([
+                              {
+                                    $match: {
+                                          name: {
+                                                $regex: new RegExp(
+                                                      [...search].join(".*?")
+                                                ),
+                                                $options: "i",
+                                          },
+                                          ...finalQuery,
+                                    },
+                              },
+                              {
+                                    $facet: {
+                                          products: [
+                                                {
+                                                      $sort: {
+                                                            price: +sort,
+                                                      },
+                                                },
+                                                { $skip: perPageItems * page },
+                                                { $limit: perPageItems },
+                                          ],
+                                          totalCount: [
+                                                {
+                                                      $count: "count",
+                                                },
+                                          ],
+                                    },
+                              },
+                        ]);
+
+                        payload = {
+                              products: result[0].products,
+                              count: result[0]?.totalCount[0]?.count || 0,
+                        };
+                        console.log(result[0].totalCount);
+                  }
             } else {
-                  products = await ProductModel.find(finalQuery)
-                        .sort({
-                              price: sort,
-                        })
-                        .skip(perPageItems * page)
-                        .limit(perPageItems);
+                  if (filters === "true") {
+                        let products = await ProductModel.find(finalQuery).sort(
+                              {
+                                    price: sort,
+                              }
+                        );
+
+                        populateFilersOptions(allFilters, products);
+
+                        payload = {
+                              products: products.slice(0, perPageItems),
+                              filters: allFilters,
+                              count: products.length,
+                        };
+                  } else {
+                        console.log(finalQuery, sort);
+                        let result = await ProductModel.aggregate([
+                              {
+                                    $match: {
+                                          ...finalQuery,
+                                    },
+                              },
+                              {
+                                    $facet: {
+                                          products: [
+                                                {
+                                                      $sort: {
+                                                            price: +sort,
+                                                      },
+                                                },
+                                                { $skip: perPageItems * page },
+                                                { $limit: perPageItems },
+                                          ],
+                                          totalCount: [
+                                                {
+                                                      $count: "count",
+                                                },
+                                          ],
+                                    },
+                              },
+                        ]);
+
+                        products = await ProductModel.find(finalQuery)
+                              .sort({
+                                    price: sort,
+                              })
+                              .skip(perPageItems * page)
+                              .limit(perPageItems);
+                        payload = {
+                              products: result[0].products,
+                              count: result[0]?.totalCount[0]?.count || 0,
+                        };
+                  }
             }
 
             response.status(200).json({
                   status: "success",
                   message: "fetched successfully",
-                  payload: products,
+                  payload,
             });
       } catch (error) {
             response

@@ -28,7 +28,7 @@ const OrderSummaryPage = () => {
                               </h2>
                               <hr></hr>
 
-                              {addressesData.map((address) => {
+                              {addressesData.map((address, index) => {
                                     return (
                                           <>
                                                 <input
@@ -39,6 +39,11 @@ const OrderSummaryPage = () => {
                                                             styles[
                                                                   "address-radio"
                                                             ]
+                                                      }
+                                                      defaultChecked={
+                                                            index === 0
+                                                                  ? true
+                                                                  : false
                                                       }
                                                       //   defaultChecked={
                                                       //         addressHistory.selectedAddress ==

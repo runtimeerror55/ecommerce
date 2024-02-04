@@ -3,8 +3,6 @@ import classes from "./productsPage.module.css";
 import { searchContext } from "../../context/search";
 import { defaultFilterValues } from "../../utilities/utilities";
 const Filtering = forwardRef((props, ref) => {
-      useContext(searchContext);
-
       const filterChangeHandler = (event) => {
             props.setFilterFormValues((previous) => {
                   if (event.target.name !== "page") {
@@ -32,11 +30,21 @@ const Filtering = forwardRef((props, ref) => {
                               name="category"
                               value={props.filterFormValues.category}
                         >
-                              <option value="" disabled>
+                              <option value="all" disabled>
                                     CATEGORIES
                               </option>
-                              <option value="mobiles">Mobiles</option>
+                              {props.loaderOneData.payload.filters[
+                                    "category"
+                              ].map((option) => {
+                                    return (
+                                          <option value={option}>
+                                                {option}
+                                          </option>
+                                    );
+                              })}
+                              {/* <option value="mobiles">Mobiles</option>
                               <option value="laptops">Laptops</option>
+                              <option value="all">all</option> */}
                               <option value="all">all</option>
                         </select>
 
@@ -44,14 +52,23 @@ const Filtering = forwardRef((props, ref) => {
                               name="brand"
                               value={props.filterFormValues.brand}
                         >
-                              <option value="" disabled>
+                              <option value="all" disabled>
                                     Brand
                               </option>
-                              <option value="Asus">Asus</option>
+                              {props.loaderOneData.payload.filters["brand"].map(
+                                    (option) => {
+                                          return (
+                                                <option value={option}>
+                                                      {option}
+                                                </option>
+                                          );
+                                    }
+                              )}
+                              {/* <option value="Asus">Asus</option>
                               <option value="Msi">Msi</option>
                               <option value="Dell">Dell</option>
                               <option value="Acer">Acer</option>
-                              <option value="Razer">Razer</option>
+                              <option value="Razer">Razer</option> */}
                               <option value="all">all</option>
                         </select>
                         <select
@@ -70,12 +87,21 @@ const Filtering = forwardRef((props, ref) => {
                               name="cpuBrand"
                               value={props.filterFormValues.cpuBrand}
                         >
-                              <option value="" disabled>
+                              <option value="all" disabled>
                                     CPU
                               </option>
-                              <option value="Amd">Amd</option>
+                              {props.loaderOneData.payload.filters[
+                                    "cpuBrand"
+                              ].map((option) => {
+                                    return (
+                                          <option value={option}>
+                                                {option}
+                                          </option>
+                                    );
+                              })}
+                              {/* <option value="Amd">Amd</option>
 
-                              <option value="Intel">Intel</option>
+                              <option value="Intel">Intel</option> */}
                               <option value="all">all</option>
                         </select>
                         <select name="page" value={props.filterFormValues.page}>
@@ -94,13 +120,10 @@ const Filtering = forwardRef((props, ref) => {
                                                 i ===
                                                 +props.filterFormValues.page + 1
                                           ) {
-                                                console.log(
-                                                      props.loaderOneData
-                                                );
                                                 if (
                                                       props.loaderOneData
-                                                            .payload.length ===
-                                                      10
+                                                            .payload.products
+                                                            .length === 10
                                                 ) {
                                                       pages.push(
                                                             <option value={i}>

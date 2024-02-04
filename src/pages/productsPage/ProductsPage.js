@@ -17,6 +17,7 @@ import { PageLandingLoader } from "../../components/loaders/pageLandingLoader";
 import { ToastContainer } from "react-toastify";
 import { searchContext } from "../../context/search";
 import { defaultFilterValues } from "../../utilities/utilities";
+import { Pagination } from "./pagination";
 
 export default function ProductsPage() {
       const [loaderOneData, setLoaderOneData] = useState(
@@ -38,11 +39,11 @@ export default function ProductsPage() {
             useState(false);
 
       useEffect(() => {
-            if (searchBarValue !== "" && flag) {
+            if (flag) {
                   setFilterFormValues(defaultFilterValues);
                   const id = setTimeout(() => {
                         productsFetcher.submit(
-                              { search: searchBarValue },
+                              { search: searchBarValue, filters: "true" },
                               {
                                     method: "GET",
                                     action: "/products",
@@ -60,6 +61,21 @@ export default function ProductsPage() {
                   setFlag(true);
             }
       }, [searchBarValue]);
+
+      useEffect(() => {
+            if (searchBarValue !== "") {
+                  productsFetcher.submit(
+                        { search: searchBarValue, filters: "true" },
+                        {
+                              method: "GET",
+                              action: "/products",
+                        }
+                  );
+                  setFiltersKey((previous) => {
+                        return !previous;
+                  });
+            }
+      }, []);
 
       useEffect(() => {
             if (loaded) {
@@ -81,11 +97,18 @@ export default function ProductsPage() {
             console.log(productsFetcher);
             if (productsFetcherStatus) {
                   const data = productsFetcher.data.data.loaderOneData;
-                  console.log(data);
+
                   if (data.status === "success") {
-                        setLoaderOneData(
-                              productsFetcher.data.data.loaderOneData
-                        );
+                        // window.scrollTo(0, 0);
+                        setLoaderOneData((previous) => {
+                              return {
+                                    status: "success",
+                                    payload: {
+                                          ...previous.payload,
+                                          ...data.payload,
+                                    },
+                              };
+                        });
                   } else {
                         toast.error(data.message, toastOptions);
                   }
@@ -115,9 +138,19 @@ export default function ProductsPage() {
                         {showFilterchangeLoader ? (
                               <PageLandingLoader></PageLandingLoader>
                         ) : (
-                              <ProductsListing
-                                    loaderOneData={loaderOneData}
-                              ></ProductsListing>
+                              <>
+                                    <ProductsListing
+                                          loaderOneData={loaderOneData}
+                                          filterFormValues={filterFormValues}
+                                    ></ProductsListing>
+                                    <Pagination
+                                          loaderOneData={loaderOneData}
+                                          filterFormValues={filterFormValues}
+                                          setFilterFormValues={
+                                                setFilterFormValues
+                                          }
+                                    ></Pagination>
+                              </>
                         )}
                   </main>
             </>

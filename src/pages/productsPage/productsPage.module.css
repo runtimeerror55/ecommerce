@@ -8,6 +8,9 @@
       display: flex;
       font-style: italic;
       justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
 }
 
 .filtering-section {
@@ -50,13 +53,19 @@ option {
       margin-left: auto;
 }
 
+.results {
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      font-style: normal;
+}
+
 .products-section {
       flex-grow: 1;
       text-align: center;
       background-color: white;
-      min-height: 100vh;
-      margin-top: 20px;
       max-width: 1000px;
+      width: 100%;
 }
 
 .product {
@@ -158,4 +167,58 @@ option {
             padding-bottom: 5px;
             font-size: 0.8em;
       }
+}
+
+.pagination {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+}
+
+.previous,
+.next {
+      padding: 4px;
+      border-radius: 4px;
+      border: 1px;
+      color: #4d4d4d;
+      border: 1px solid #d9d9d9;
+      display: flex;
+      align-items: center;
+      font-size: 0.8em;
+      font-weight: 500;
+      line-height: 20px;
+      cursor: pointer;
+}
+
+.previous:hover,
+.next:hover {
+      background-color: #8a2b06;
+      color: white;
+}
+
+.page-numbers {
+      display: flex;
+      gap: 3px;
+}
+
+.number {
+      width: 28px;
+      padding: 2px 0px 2px 0px;
+      border-radius: 4px;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      letter-spacing: 0em;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+}
+
+.page-active {
+      background-color: #8a2b06;
+      color: white;
 }
