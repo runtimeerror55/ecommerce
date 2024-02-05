@@ -12,18 +12,32 @@ const Address = ({ address }) => {
             <>
                   <div className={styles.address}>
                         <div>
-                              <i>{address.firstName} </i>
-                              <i>{address.lastName}</i>
+                              <i className={styles["address-info"]}>
+                                    {address.firstName}{" "}
+                              </i>
+                              <i className={styles["address-info"]}>
+                                    {address.lastName}
+                              </i>
                         </div>
                         <div>
-                              <i>{address.city} </i>
-                              <i>{address.state} </i>
-                              <i>{address.country}</i>
+                              <i className={styles["address-info"]}>
+                                    {address.city}{" "}
+                              </i>
+                              <i className={styles["address-info"]}>
+                                    {address.state}{" "}
+                              </i>
+                              <i className={styles["address-info"]}>
+                                    {address.country}
+                              </i>
                         </div>
                         <div>
-                              <i>{address.street}</i>
+                              <i className={styles["address-info"]}>
+                                    {address.street}
+                              </i>
                         </div>
-                        <i>{address.phoneNumber}</i>
+                        <i className={styles["address-info"]}>
+                              {address.phoneNumber}
+                        </i>
                         <div className={styles.navigation}>
                               <button
                                     onClick={editButtonClickHandler}

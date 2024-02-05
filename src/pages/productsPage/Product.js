@@ -29,53 +29,55 @@ const Product = ({ product }) => {
                         </div>
 
                         <div className={classes["product-information"]}>
-                              <h3 className={classes["product-name"]}>
-                                    <i>{product.name}</i>
-                              </h3>
                               <div>
-                                    <i className={classes["info"]}>
+                                    <h3 className={classes["product-name"]}>
+                                          <i>{product.name}</i>
+                                    </h3>
+                                    <div className={classes["info"]}>
                                           {product.cpu}
-                                    </i>
-                              </div>
-                              <div>
-                                    <i className={classes["info"]}>
+                                    </div>
+                                    <div className={classes["info"]}>
                                           {product.ram}gb ram
-                                    </i>
-                              </div>
-                              <div>
-                                    <i className={classes["info"]}>
+                                    </div>
+                                    <div className={classes["info"]}>
                                           240hz refresh rate
-                                    </i>
-                              </div>
-                              <div>
-                                    <i className={classes["info"]}>
+                                    </div>
+                                    <div className={classes["info"]}>
                                           {product.storage}
-                                    </i>
+                                    </div>
+                              </div>
+                              <div className={classes["price-add-to-cart"]}>
+                                    <div className={classes["product-price"]}>
+                                          ${product.price}
+                                    </div>
+                                    {isProductPresentInTheCart ? (
+                                          <Link
+                                                to="/account/cart"
+                                                className={classes["cart-link"]}
+                                          >
+                                                Go to cart
+                                          </Link>
+                                    ) : (
+                                          <ButtonWithActionAndLoader
+                                                method="POST"
+                                                action={`/account/cart/${product._id}?type=add+to+cart`}
+                                                buttonClass={
+                                                      classes[
+                                                            "add-to-cart-button"
+                                                      ]
+                                                }
+                                                buttonText="Add"
+                                                loaderHeight="25"
+                                                loaderWidth="100%"
+                                                formClass={
+                                                      classes[
+                                                            "add-to-cart-form"
+                                                      ]
+                                                }
+                                          ></ButtonWithActionAndLoader>
+                                    )}
                               </div>
                         </div>
-                  </div>
-
-                  <div>
-                        <div className={classes["product-price"]}>
-                              <i>${product.price}</i>
-                        </div>
-                        {isProductPresentInTheCart ? (
-                              <Link
-                                    to="/account/cart"
-                                    className={classes["cart-link"]}
-                              >
-                                    Go to cart
-                              </Link>
-                        ) : (
-                              <ButtonWithActionAndLoader
-                                    method="POST"
-                                    action={`/account/cart/${product._id}?type=add+to+cart`}
-                                    buttonClass={classes["add-to-cart-button"]}
-                                    buttonText="Add"
-                                    loaderHeight="25"
-                                    loaderWidth="100%"
-                              ></ButtonWithActionAndLoader>
-                        )}
                   </div>
             </div>
       );

@@ -100,6 +100,15 @@ option {
       text-align: start;
       flex-grow: 1;
       margin-left: 10%;
+      display: flex;
+}
+
+.price-add-to-cart {
+      display: flex;
+      margin-left: auto;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
 }
 
 .product-price {
@@ -112,10 +121,10 @@ option {
 .cart-link {
       font-weight: bold;
       font-size: 15px;
-      background-color: #8a2b06;
+      background-color: cadetblue;
       width: 100px;
       height: 30px;
-
+      display: block;
       border-radius: 20px;
       color: white;
       cursor: pointer;
@@ -127,53 +136,6 @@ option {
       align-items: center;
       justify-content: center;
       background-color: green;
-}
-
-@media (max-width: 800px) {
-      .product {
-            padding-left: 0;
-            padding-right: 0;
-            margin: 10px;
-      }
-      .product-image {
-            max-width: 120px;
-      }
-      .product-name {
-            font-size: 1em;
-      }
-      .product-information {
-            margin-left: 10px;
-      }
-      .add-to-cart-button,
-      .cart-link {
-            width: 70px;
-            height: 22px;
-            font-size: 0.8em;
-      }
-
-      .info {
-            font-size: 0.8em;
-      }
-      .product-price {
-            font-size: 1.1em;
-      }
-      .product-image-container {
-            width: 120px;
-      }
-      select {
-            padding-left: 8px;
-            padding-right: 8px;
-            padding-top: 5px;
-            padding-bottom: 5px;
-            font-size: 0.8em;
-      }
-}
-
-@media (max-width: 500px) {
-      .product-image {
-            max-height: 90px;
-            max-width: 120px;
-      }
 }
 
 .pagination {
@@ -228,4 +190,109 @@ option {
 .page-active {
       background-color: #8a2b06;
       color: white;
+}
+
+@media (max-width: 600px) {
+      .product {
+            padding-left: 0;
+            padding-right: 0;
+            margin: 10px;
+      }
+      .product-image,
+      .product-image-container {
+            max-width: 120px;
+      }
+      .product-name {
+            font-size: 1em;
+      }
+
+      .add-to-cart-button,
+      .cart-link {
+            width: 70px;
+            height: 22px;
+            font-size: 0.8em;
+      }
+
+      .info {
+            font-size: 0.8em;
+      }
+      .product-price {
+            font-size: 1.1em;
+      }
+      .product-image-container {
+            min-width: 120px;
+      }
+      select {
+            padding-left: 8px;
+            padding-right: 8px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            font-size: 0.8em;
+      }
+      .product-image {
+            max-height: 90px;
+      }
+}
+
+@media (max-width: 450px) {
+      .info {
+            padding: 2px;
+            margin: 2px;
+            display: inline-block;
+            border: 2px solid lightblue;
+            height: fit-content;
+            display: inline-flex;
+            width: fit-content;
+            padding-top: 0;
+            padding-bottom: 0;
+      }
+      /* .price-add-to-cart {
+            display: flex;
+      } */
+      .product-information {
+            flex-direction: column;
+            margin-left: 5%;
+      }
+      .price-add-to-cart {
+            margin-left: unset;
+            height: 25px;
+            flex-direction: row;
+            margin-top: 10px;
+            margin-right: 5px;
+            gap: 3px;
+      }
+
+      .add-to-cart-form {
+            height: 100%;
+      }
+
+      .product-price {
+            font-size: 0.8em;
+            background-color: #d24761;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+      }
+
+      .product-price,
+      .add-to-cart-form {
+            flex-grow: 1;
+            text-align: center;
+            color: white;
+            margin: 0;
+            flex-basis: 100%;
+      }
+      .add-to-cart-button {
+            width: 100%;
+            font-size: 0.8em;
+            height: 100%;
+            border-radius: 0;
+      }
+      .cart-link {
+            flex-grow: 1;
+            border-radius: 0;
+            height: 100%;
+            flex-basis: 100%;
+      }
 }
