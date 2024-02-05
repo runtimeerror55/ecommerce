@@ -45,7 +45,7 @@
 .product-image {
       max-width: 150px;
       height: fit-content;
-      max-height: 150px;
+      max-height: 100px;
 }
 .product-name {
       margin-bottom: 3px;
@@ -182,5 +182,9 @@ hr {
 @media (max-width: 500px) {
       .product-information {
             margin-left: 3%;
+      }
+      .product-image {
+            max-height: 90px;
+            max-width: 120px;
       }
 }

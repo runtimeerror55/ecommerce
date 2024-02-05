@@ -90,7 +90,7 @@ option {
 .product-image {
       max-width: 200px;
       height: fit-content;
-      max-height: 150px;
+      max-height: 100px;
 }
 .product-name {
       margin-bottom: 3px;
@@ -166,6 +166,13 @@ option {
             padding-top: 5px;
             padding-bottom: 5px;
             font-size: 0.8em;
+      }
+}
+
+@media (max-width: 500px) {
+      .product-image {
+            max-height: 90px;
+            max-width: 120px;
       }
 }
 
