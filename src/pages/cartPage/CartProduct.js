@@ -6,11 +6,13 @@ const CartProduct = ({ cartProduct }) => {
       return (
             <div className={styles.product}>
                   <div className={styles["product-image-and-info"]}>
-                        <img
-                              src={cartProduct.product.image}
-                              className={styles["product-image"]}
-                              alt={cartProduct.product.name}
-                        ></img>
+                        <div className={styles["product-image-container"]}>
+                              <img
+                                    src={cartProduct.product.image}
+                                    className={styles["product-image"]}
+                                    alt={cartProduct.product.name}
+                              ></img>
+                        </div>
 
                         <div className={styles["product-information"]}>
                               <h3 className={styles["product-name"]}>
