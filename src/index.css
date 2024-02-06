@@ -11,6 +11,12 @@ body {
       font-family: "Segoe UI";
       padding: 0;
 }
+a:visited,
+a:active,
+a,
+a:hover {
+      color: inherit;
+}
 
 code {
       font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",

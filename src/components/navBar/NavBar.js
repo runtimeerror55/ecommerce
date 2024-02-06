@@ -56,7 +56,10 @@ export default forwardRef(function NavBar(props, ref) {
       const searchChangeHandler = (event) => {
             console.log(location);
             filterChangeHandler(event);
-            if (!location.pathname.includes("/products")) {
+            if (
+                  !location.pathname.includes("/products") ||
+                  location.pathname.split("products").length > 1
+            ) {
                   navigate(`/products`);
             }
       };

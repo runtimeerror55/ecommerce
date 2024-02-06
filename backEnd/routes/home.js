@@ -193,4 +193,16 @@ router.route("/").get(async (request, response) => {
       }
 });
 
+router.route("/products/:id").get(async (request, response) => {
+      try {
+            console.log(request.params);
+            const product = await ProductModel.findById(request.params.id);
+            response.status(200).json({ status: "success", payload: product });
+      } catch (error) {
+            response
+                  .status(500)
+                  .json({ status: "error", message: error.message });
+      }
+});
+
 module.exports = router;

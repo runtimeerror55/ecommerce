@@ -8,7 +8,8 @@ import {
 } from "react-router-dom";
 import classes from "./productsPage.module.css";
 import { ButtonWithActionAndLoader } from "../../components/buttons/buttonWithActionAndLoader";
-import laptop from "../../assests/laptop.jpg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 const Product = ({ product }) => {
       const { loaderTwoData } = useAsyncValue();
       const isProductPresentInTheCart = loaderTwoData?.payload?.some(
@@ -31,7 +32,22 @@ const Product = ({ product }) => {
                         <div className={classes["product-information"]}>
                               <div>
                                     <h3 className={classes["product-name"]}>
-                                          <i>{product.name}</i>
+                                          <Link
+                                                to={product._id}
+                                                className={
+                                                      classes["product-link"]
+                                                }
+                                          >
+                                                {product.name}
+                                                <FontAwesomeIcon
+                                                      icon={
+                                                            faArrowUpRightFromSquare
+                                                      }
+                                                      style={{
+                                                            fontSize: "13px",
+                                                      }}
+                                                />
+                                          </Link>
                                     </h3>
                                     <div className={classes["info"]}>
                                           {product.cpu}

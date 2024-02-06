@@ -94,6 +94,14 @@ option {
 .product-name {
       margin-bottom: 3px;
 }
+.product-link {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+}
+.product-link:hover {
+      color: grey;
+}
 
 .product-information {
       text-align: start;
@@ -140,6 +148,7 @@ option {
       align-items: center;
       justify-content: center;
       background-color: rgb(12, 138, 12);
+      color: white !important;
 }
 
 .pagination {

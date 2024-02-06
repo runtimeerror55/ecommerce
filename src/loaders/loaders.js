@@ -1,4 +1,4 @@
-import { defer, redirect } from "react-router-dom";
+import { defer, json, redirect } from "react-router-dom";
 import { getToken } from "../utilities/utilities";
 let backEndUrl = "https://ecommerce-backend-ten-mauve.vercel.app/";
 // backEndUrl = "http://localhost:3000/";
@@ -202,6 +202,35 @@ export const profilePageLoader = () => {
                         });
                         const data = await response.json();
                         return data;
+                  } catch (error) {
+                        return { status: "error", message: error.message };
+                  }
+            })(),
+      });
+};
+
+export const ProductPageLoader = ({ request, params }) => {
+      return defer({
+            data: (async () => {
+                  try {
+                        const responseOne = fetch(
+                              `${backEndUrl}products/${params.id}`
+                        );
+                        const responseTwo = fetch(`${backEndUrl}account/cart`, {
+                              headers: {
+                                    authorization: "Bearer " + getToken(),
+                              },
+                        });
+
+                        const responseThree = await Promise.all([
+                              responseOne,
+                              responseTwo,
+                        ]);
+
+                        return {
+                              loaderOneData: await responseThree[0].json(),
+                              loaderTwoData: await responseThree[1].json(),
+                        };
                   } catch (error) {
                         return { status: "error", message: error.message };
                   }

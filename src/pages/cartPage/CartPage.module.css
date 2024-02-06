@@ -32,6 +32,15 @@
       width: 200px;
 }
 
+.product-link {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+}
+.product-link:hover {
+      color: grey;
+}
+
 .product-name {
       margin-bottom: 3px;
 }

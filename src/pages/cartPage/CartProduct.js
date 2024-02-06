@@ -1,7 +1,9 @@
 import styles from "../cartPage/CartPage.module.css";
 import laptop from "../../assests/laptop.jpg";
-import { Form } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ButtonWithActionAndLoader } from "../../components/buttons/buttonWithActionAndLoader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 const CartProduct = ({ cartProduct }) => {
       return (
             <div className={styles.product}>
@@ -16,7 +18,18 @@ const CartProduct = ({ cartProduct }) => {
 
                         <div className={styles["product-information"]}>
                               <h3 className={styles["product-name"]}>
-                                    <i>{cartProduct.product.name}</i>
+                                    <Link
+                                          to={`/products/${cartProduct.product._id}`}
+                                          className={styles["product-link"]}
+                                    >
+                                          {cartProduct.product.name}
+                                          <FontAwesomeIcon
+                                                icon={faArrowUpRightFromSquare}
+                                                style={{
+                                                      fontSize: "13px",
+                                                }}
+                                          />
+                                    </Link>
                               </h3>
                               <div className={styles["container-one"]}>
                                     <div className={styles["container-two"]}>
