@@ -20,29 +20,18 @@ const CartProduct = ({ cartProduct }) => {
                               </h3>
                               <div className={styles["container-one"]}>
                                     <div className={styles["container-two"]}>
-                                          <div>
-                                                <i className={styles["info"]}>
-                                                      {cartProduct.product.cpu}
-                                                </i>
+                                          <div className={styles["info"]}>
+                                                {cartProduct.product.cpu}
                                           </div>
-                                          <div>
-                                                <i className={styles["info"]}>
-                                                      {cartProduct.product.ram}
-                                                      gb ram
-                                                </i>
+                                          <div className={styles["info"]}>
+                                                {cartProduct.product.ram}
+                                                gb ram
                                           </div>
-                                          <div>
-                                                <i className={styles["info"]}>
-                                                      240hz refresh rate
-                                                </i>
+                                          <div className={styles["info"]}>
+                                                240hz refresh rate
                                           </div>
-                                          <div>
-                                                <i className={styles["info"]}>
-                                                      {
-                                                            cartProduct.product
-                                                                  .storage
-                                                      }
-                                                </i>
+                                          <div className={styles["info"]}>
+                                                {cartProduct.product.storage}
                                           </div>
                                     </div>
                                     <div className={styles["container-3"]}>
@@ -77,6 +66,24 @@ const CartProduct = ({ cartProduct }) => {
                                                             ]
                                                       }
                                                 ></ButtonWithActionAndLoader>
+                                                <div
+                                                      className={
+                                                            styles[
+                                                                  "product-quantity"
+                                                            ] +
+                                                            " " +
+                                                            styles[
+                                                                  "product-quantity-450px"
+                                                            ]
+                                                      }
+                                                >
+                                                      <i>
+                                                            X{" "}
+                                                            {
+                                                                  cartProduct.quantity
+                                                            }
+                                                      </i>
+                                                </div>
                                                 <ButtonWithActionAndLoader
                                                       method="POST"
                                                       action={`/account/cart/${cartProduct.product._id}?type=add+to+cart`}

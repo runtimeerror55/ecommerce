@@ -41,6 +41,10 @@
       flex-grow: 1;
       margin-left: 10%;
 }
+.info {
+      font-size: 0.9em;
+      margin-left: 4px;
+}
 
 .product-image {
       max-width: 150px;
@@ -69,7 +73,9 @@
       font-weight: bold;
       margin: 2px;
 }
-
+.product-quantity-450px {
+      display: none;
+}
 .container-3 {
       margin-left: auto;
 }
@@ -84,7 +90,7 @@
 }
 .add-to-cart-button,
 .remove-from-cart-button {
-      width: 50px;
+      width: 70px;
       height: 20px;
       font-weight: bold;
       font-size: 15px;
@@ -98,6 +104,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
+}
+
+.add-to-cart-button {
+      background-color: #0f98c6;
+}
+.remove-from-cart-button {
+      background-color: #cf2323;
 }
 
 .cart-price-details {
@@ -161,6 +174,21 @@ hr {
       .product-image {
             max-width: 120px;
       }
+
+      .product-image-container {
+            max-width: 120px;
+            min-width: 120px;
+      }
+}
+
+@media (max-width: 600px) {
+      .product-information {
+            margin-left: 3%;
+      }
+      .product-image {
+            max-height: 90px;
+            max-width: 120px;
+      }
       .product-name {
             font-size: 1em;
       }
@@ -169,22 +197,55 @@ hr {
       }
       .add-to-cart-button,
       .remove-from-cart-button {
-            width: 35px;
+            width: 60px;
       }
       .product-quantity {
             font-size: 1.2em;
       }
-      .product-image-container {
-            width: 120px;
-      }
 }
 
-@media (max-width: 500px) {
-      .product-information {
-            margin-left: 3%;
+@media (max-width: 450px) {
+      .container-one {
+            flex-direction: column;
+            gap: 5px;
       }
-      .product-image {
-            max-height: 90px;
-            max-width: 120px;
+      .container-two {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+      }
+      .container-3 {
+            margin-left: 0;
+            display: flex;
+            justify-content: end;
+            margin-bottom: 5px;
+      }
+      .product-quantity {
+            display: none;
+      }
+      .product-quantity-450px {
+            display: block;
+            font-size: 0.9em;
+            flex-basis: 100%;
+      }
+      .cart-product-action-buttons {
+            align-items: center;
+            width: 100%;
+      }
+      .add-to-cart-button,
+      .remove-from-cart-button {
+            width: 100%;
+            margin: 0;
+      }
+      .add-to-cart-form,
+      .remove-from-cart-form {
+            flex-basis: 100%;
+      }
+      .info {
+            border: 2px solid lightblue;
+            padding-left: 2px;
+            padding-right: 2px;
       }
 }
