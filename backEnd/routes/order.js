@@ -109,7 +109,6 @@ router.route("/account/orders/:orderId").get(async (request, response) => {
 });
 
 router.route("/payment/orders").post(async (req, res) => {
-      console.log(process.env.RAZORPAY_KEY_ID);
       try {
             const { totalPrice } = req.body;
             const instance = new Razorpay({
@@ -132,46 +131,47 @@ router.route("/payment/orders").post(async (req, res) => {
             res.status(500).send(error);
       }
 });
-router.route("/payment/success").post(async (req, res) => {
-      try {
-            // getting the details back from our font-end
-            const {
-                  orderCreationId,
-                  razorpayPaymentId,
-                  razorpayOrderId,
-                  razorpaySignature,
-            } = req.body;
 
-            console.log(req.body);
-            // Creating our own digest
-            // The format should be like this:
-            // digest = hmac_sha256(orderCreationId + "|" + razorpayPaymentId, secret);
-            const shasum = crypto.createHmac(
-                  "sha256",
-                  "WK4sIqOnSV6Yh9HqAIWawbpC"
-            );
-            console.log(shasum);
-            shasum.update(`${orderCreationId}|${razorpayPaymentId}`);
+// router.route("/payment/success").post(async (req, res) => {
+//       try {
+//             // getting the details back from our font-end
+//             const {
+//                   orderCreationId,
+//                   razorpayPaymentId,
+//                   razorpayOrderId,
+//                   razorpaySignature,
+//             } = req.body;
 
-            const digest = shasum.digest("hex");
-            console.log(digest === razorpaySignature);
+//             console.log(req.body);
+//             // Creating our own digest
+//             // The format should be like this:
+//             // digest = hmac_sha256(orderCreationId + "|" + razorpayPaymentId, secret);
+//             const shasum = crypto.createHmac(
+//                   "sha256",
+//                   "WK4sIqOnSV6Yh9HqAIWawbpC"
+//             );
+//             console.log(shasum);
+//             shasum.update(`${orderCreationId}|${razorpayPaymentId}`);
 
-            // comaparing our digest with the actual signature
-            if (digest !== razorpaySignature)
-                  return res
-                        .status(400)
-                        .json({ msg: "Transaction not legit!" });
+//             const digest = shasum.digest("hex");
+//             console.log(digest === razorpaySignature);
 
-            // THE PAYMENT IS LEGIT & VERIFIED
-            // YOU CAN SAVE THE DETAILS IN YOUR DATABASE IF YOU WANT
+//             // comaparing our digest with the actual signature
+//             if (digest !== razorpaySignature)
+//                   return res
+//                         .status(400)
+//                         .json({ msg: "Transaction not legit!" });
 
-            res.json({
-                  msg: "success",
-                  orderId: razorpayOrderId,
-                  paymentId: razorpayPaymentId,
-            });
-      } catch (error) {
-            res.status(500).send(error);
-      }
-});
+//             // THE PAYMENT IS LEGIT & VERIFIED
+//             // YOU CAN SAVE THE DETAILS IN YOUR DATABASE IF YOU WANT
+
+//             res.json({
+//                   msg: "success",
+//                   orderId: razorpayOrderId,
+//                   paymentId: razorpayPaymentId,
+//             });
+//       } catch (error) {
+//             res.status(500).send(error);
+//       }
+// });
 module.exports = router;
