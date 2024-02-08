@@ -4,7 +4,7 @@ import { GoBackButton } from "../../components/buttons/goBack";
 export const OrderPage = () => {
       const loaderData = useAsyncValue();
       const navigate = useNavigate();
-      console.log(loaderData);
+
       return (
             <div className={styles["order"]}>
                   <GoBackButton
@@ -25,10 +25,6 @@ export const OrderPage = () => {
                               <div>
                                     <b>AMOUNT-PAID: </b>$
                                     {loaderData.payload.amountPaid}
-                              </div>
-                              <div>
-                                    <b>ADDRESS: </b>rouad no 3 ,saroornagar
-                                    ,hyderabad
                               </div>
                         </div>
                         <div className={styles["products"]}>
