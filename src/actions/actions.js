@@ -16,7 +16,7 @@ const actions = async ({ request, params }) => {
       } else if (type === "remove from cart") {
             return await removeFromCartAction(params);
       } else if (type === "place order") {
-            return await placeOrder();
+            return await placeOrder(request, params);
       } else if (type === "add address") {
             return await addAddress(request);
       } else if (type === "edit address") {
@@ -96,13 +96,17 @@ const addAddress = async (request) => {
       }
 };
 
-const placeOrder = async () => {
+const placeOrder = async (request) => {
       try {
+            const body = await request.json();
+
             const response = await fetch(backEndUrl + "account/orders", {
                   method: "POST",
                   headers: {
                         authorization: "Bearer " + getToken(),
+                        "Content-Type": "application/json",
                   },
+                  body: JSON.stringify(body),
             });
             const data = response.json();
             return data;

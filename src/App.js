@@ -9,6 +9,7 @@ import {
       navBarLoader,
       profilePageLoader,
       ProductPageLoader,
+      orderPageLoader,
 } from "./loaders/loaders";
 import actions from "./actions/actions";
 
@@ -20,6 +21,7 @@ import { AwaitProductPage } from "./pages/productPage/awaitProductPage";
 import { AwaitCartPage } from "./pages/cartPage/awaitCartPage";
 import { AwaitAdressesPage } from "./pages/addressesPage/awaitAddressesPage";
 import { AwaitOrdersHistoryPage } from "./pages/ordersHistoryPage/awaitOrdersHistoryPage";
+import { AwaitOrderPage } from "./pages/orderPage/awaitOrderPage";
 import { AwaitOrderSummaryPage } from "./pages/orderSummaryPage/awaitOrderSummaryPage";
 import { AwaitProfilePage } from "./pages/profilePage/awaitProfilePage";
 import { LoginPage } from "./pages/loginPage/loginPage";
@@ -67,6 +69,11 @@ const router = createBrowserRouter([
                                     ),
                                     loader: ordersHistoryPageLoader,
                                     action: actions,
+                              },
+                              {
+                                    path: "orders/:id",
+                                    element: <AwaitOrderPage></AwaitOrderPage>,
+                                    loader: orderPageLoader,
                               },
 
                               {

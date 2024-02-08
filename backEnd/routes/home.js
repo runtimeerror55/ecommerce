@@ -141,7 +141,6 @@ router.route("/").get(async (request, response) => {
                               count: products.length,
                         };
                   } else {
-                        console.log(finalQuery, sort);
                         let result = await ProductModel.aggregate([
                               {
                                     $match: {
@@ -195,7 +194,6 @@ router.route("/").get(async (request, response) => {
 
 router.route("/products/:id").get(async (request, response) => {
       try {
-            console.log(request.params);
             const product = await ProductModel.findById(request.params.id);
             response.status(200).json({ status: "success", payload: product });
       } catch (error) {

@@ -5,6 +5,8 @@ const OrderModel = require("../models/order");
 const CartModel = require("../models/cart");
 const { isLoggedIn } = require("../middleware");
 
+const Razorpay = require("razorpay");
+
 router.route("/account/orders")
       .get(isLoggedIn, async (request, response) => {
             try {
@@ -28,6 +30,7 @@ router.route("/account/orders")
       })
       .post(isLoggedIn, async (request, response) => {
             try {
+                  const body = request.body;
                   const cart = await CartModel.findOne({
                         user: request.user._id,
                   }).populate({
@@ -60,6 +63,7 @@ router.route("/account/orders")
                         orderedProducts: cartProducts,
                         quantity,
                         date: today,
+                        ...body,
                   });
 
                   const orderHistory = await OrderHistoryModel.findOne({
@@ -96,11 +100,78 @@ router.route("/account/orders/:orderId").get(async (request, response) => {
                   populate: { path: "product" },
             });
 
-            response.json(order.orderedProducts);
+            response.json({ status: "success", payload: order });
       } catch (error) {
             response
                   .status(500)
                   .json({ status: "error", message: error.message });
+      }
+});
+
+router.route("/payment/orders").post(async (req, res) => {
+      console.log(process.env.RAZORPAY_KEY_ID);
+      try {
+            const { totalPrice } = req.body;
+            const instance = new Razorpay({
+                  key_id: process.env.RAZORPAY_KEY_ID,
+                  key_secret: process.env.RAZORPAY_SECRET,
+            });
+
+            const options = {
+                  amount: totalPrice * 100, // amount in smallest currency unit
+                  currency: "INR",
+                  receipt: "receipt_order_74394",
+            };
+
+            const order = await instance.orders.create(options);
+
+            if (!order) return res.status(500).send("Some error occured");
+
+            res.json(order);
+      } catch (error) {
+            res.status(500).send(error);
+      }
+});
+router.route("/payment/success").post(async (req, res) => {
+      try {
+            // getting the details back from our font-end
+            const {
+                  orderCreationId,
+                  razorpayPaymentId,
+                  razorpayOrderId,
+                  razorpaySignature,
+            } = req.body;
+
+            console.log(req.body);
+            // Creating our own digest
+            // The format should be like this:
+            // digest = hmac_sha256(orderCreationId + "|" + razorpayPaymentId, secret);
+            const shasum = crypto.createHmac(
+                  "sha256",
+                  "WK4sIqOnSV6Yh9HqAIWawbpC"
+            );
+            console.log(shasum);
+            shasum.update(`${orderCreationId}|${razorpayPaymentId}`);
+
+            const digest = shasum.digest("hex");
+            console.log(digest === razorpaySignature);
+
+            // comaparing our digest with the actual signature
+            if (digest !== razorpaySignature)
+                  return res
+                        .status(400)
+                        .json({ msg: "Transaction not legit!" });
+
+            // THE PAYMENT IS LEGIT & VERIFIED
+            // YOU CAN SAVE THE DETAILS IN YOUR DATABASE IF YOU WANT
+
+            res.json({
+                  msg: "success",
+                  orderId: razorpayOrderId,
+                  paymentId: razorpayPaymentId,
+            });
+      } catch (error) {
+            res.status(500).send(error);
       }
 });
 module.exports = router;

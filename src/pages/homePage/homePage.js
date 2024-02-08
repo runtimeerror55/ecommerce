@@ -7,6 +7,7 @@ import {
       faMoneyBill1Wave,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+
 const HomePage = () => {
       return (
             <main className={styles.main}>

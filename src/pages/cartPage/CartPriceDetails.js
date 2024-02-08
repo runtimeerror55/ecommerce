@@ -8,7 +8,7 @@ const CartPriceDetails = ({ cartProductsData }) => {
       let discount = 0;
       let deliveryCharges = 0;
       if (cartProductsData.length > 0) {
-            discount = 500;
+            discount = 50;
             deliveryCharges = 30;
             priceOfAllProducts = cartProductsData.reduce(
                   (total, cartProduct) => {

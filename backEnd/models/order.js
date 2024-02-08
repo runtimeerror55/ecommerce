@@ -11,6 +11,9 @@ const orderSchema = mongoose.Schema({
       ],
       date: String,
       quantity: Number,
+      orderId: String,
+      paymentId: String,
+      amountPaid: String,
 });
 
 const OrderModel = mongoose.model("orders", orderSchema);

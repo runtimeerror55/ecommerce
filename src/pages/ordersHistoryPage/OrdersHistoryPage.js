@@ -1,4 +1,5 @@
-import { useAsyncValue } from "react-router-dom";
+import { useAsyncValue, Link } from "react-router-dom";
+
 import styles from "./ordersHistoryPage.module.css";
 
 const OrdersHistoryPage = () => {
@@ -9,12 +10,15 @@ const OrdersHistoryPage = () => {
                   <div className={styles["option-data"]}>
                         {loaderData?.payload?.orders.map((order) => {
                               return (
-                                    <div className={styles.order}>
+                                    <Link
+                                          to={order._id}
+                                          className={styles.order}
+                                    >
                                           <h3>
                                                 <i>{order.quantity} products</i>
                                           </h3>
                                           <i>{order.date}</i>
-                                    </div>
+                                    </Link>
                               );
                         })}
                   </div>

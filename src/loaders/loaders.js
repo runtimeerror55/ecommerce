@@ -127,6 +127,31 @@ export const ordersHistoryPageLoader = async () => {
       });
 };
 
+export const orderPageLoader = async ({ request, params }) => {
+      if (!getToken()) {
+            return redirect("/login");
+      }
+      return defer({
+            loaderData: (async () => {
+                  try {
+                        const response = await fetch(
+                              `${backEndUrl}account/orders/${params.id}`,
+                              {
+                                    headers: {
+                                          authorization: "Bearer " + getToken(),
+                                    },
+                              }
+                        );
+                        const data = await response.json();
+
+                        return data;
+                  } catch (error) {
+                        return { status: "error", message: error.message };
+                  }
+            })(),
+      });
+};
+
 export const OrderSummaryPageLoader = async () => {
       if (!getToken()) {
             return redirect("/login");
