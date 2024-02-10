@@ -142,7 +142,7 @@ router.route("/payment/orders").post(async (req, res) => {
 //                   razorpaySignature,
 //             } = req.body;
 
-//             console.log(req.body);
+//
 //             // Creating our own digest
 //             // The format should be like this:
 //             // digest = hmac_sha256(orderCreationId + "|" + razorpayPaymentId, secret);
@@ -150,11 +150,11 @@ router.route("/payment/orders").post(async (req, res) => {
 //                   "sha256",
 //                   "WK4sIqOnSV6Yh9HqAIWawbpC"
 //             );
-//             console.log(shasum);
+//
 //             shasum.update(`${orderCreationId}|${razorpayPaymentId}`);
 
 //             const digest = shasum.digest("hex");
-//             console.log(digest === razorpaySignature);
+//
 
 //             // comaparing our digest with the actual signature
 //             if (digest !== razorpaySignature)

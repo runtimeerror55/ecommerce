@@ -32,11 +32,11 @@ export const colorRingOptions = {
 
 export const defaultFilterValues = {
       brand: "all",
-      price: "4000",
       sort: "1",
       cpuBrand: "all",
       category: "all",
       page: "0",
+      price: 0,
 };
 
 export const populateFilersOptions = (filters, products) => {

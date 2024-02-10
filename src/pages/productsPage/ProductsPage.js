@@ -79,14 +79,18 @@ export default function ProductsPage() {
 
       useEffect(() => {
             if (loaded) {
-                  productsFetcher.submit(
-                        { ...filterFormValues, search: searchBarValue },
-                        {
-                              method: "GET",
-                              action: "/products",
-                        }
-                  );
-                  console.log("yess");
+                  const id = setTimeout(() => {
+                        productsFetcher.submit(
+                              { ...filterFormValues, search: searchBarValue },
+                              {
+                                    method: "GET",
+                                    action: "/products",
+                              }
+                        );
+                  }, 200);
+                  return () => {
+                        clearTimeout(id);
+                  };
             }
             if (!loaded) {
                   setLoaded(true);
@@ -120,6 +124,12 @@ export default function ProductsPage() {
                   }
             }
       }, [productsFetcher]);
+
+      useEffect(() => {
+            setFiltersKey((previous) => {
+                  return !previous;
+            });
+      }, [loaderOneData.payload.filters.maxPrice]);
 
       if (loaderOneData.status === "error") {
             return <h2>{loaderOneData.message}</h2>;

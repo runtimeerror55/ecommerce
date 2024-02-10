@@ -53,7 +53,6 @@ router.route("/register")
             response.json("yes");
       })
       .post(async (request, response) => {
-            console.log(request.body);
             try {
                   const { name, password, email } = request.body;
 

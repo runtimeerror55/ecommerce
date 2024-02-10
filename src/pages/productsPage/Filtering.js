@@ -3,6 +3,9 @@ import classes from "./productsPage.module.css";
 import { searchContext } from "../../context/search";
 import { defaultFilterValues } from "../../utilities/utilities";
 const Filtering = forwardRef((props, ref) => {
+      const [maxPrice, setMaxPrice] = useState(
+            props.loaderOneData.payload.filters.maxPrice
+      );
       const filterChangeHandler = (event) => {
             props.setFilterFormValues((previous) => {
                   if (event.target.name !== "page") {
@@ -18,6 +21,8 @@ const Filtering = forwardRef((props, ref) => {
                   };
             });
       };
+      console.log(props?.loaderOneData?.payload.filters.maxPrice, maxPrice);
+
       return (
             <section
                   className={classes["filtering-section"]}
@@ -71,7 +76,25 @@ const Filtering = forwardRef((props, ref) => {
                               <option value="Razer">Razer</option> */}
                               <option value="all">all</option>
                         </select>
-                        <select
+                        <div className={classes["filter"]}>
+                              <input
+                                    name="price"
+                                    type="range"
+                                    min={0}
+                                    max={
+                                          props.loaderOneData.payload.filters
+                                                .maxPrice
+                                    }
+                                    onChange={(event) => {
+                                          setMaxPrice(event.target.value);
+                                    }}
+                                    value={maxPrice}
+                              ></input>
+                              <div style={{ width: "max-content" }}>
+                                    max-price: ${maxPrice}
+                              </div>
+                        </div>
+                        {/* <select
                               name="price"
                               value={props.filterFormValues.price}
                         >
@@ -82,7 +105,7 @@ const Filtering = forwardRef((props, ref) => {
                               <option value="3000">upto $ 3000</option>
                               <option value="2000">upto $ 2000</option>
                               <option value="1000">upto $ 1000</option>
-                        </select>
+                        </select> */}
                         <select
                               name="cpuBrand"
                               value={props.filterFormValues.cpuBrand}
@@ -104,7 +127,7 @@ const Filtering = forwardRef((props, ref) => {
                               <option value="Intel">Intel</option> */}
                               <option value="all">all</option>
                         </select>
-                        <select name="page" value={props.filterFormValues.page}>
+                        {/* <select name="page" value={props.filterFormValues.page}>
                               <option value="" disabled>
                                     PAGE
                               </option>
@@ -141,7 +164,7 @@ const Filtering = forwardRef((props, ref) => {
                                     }
                                     return pages;
                               })()}
-                        </select>
+                        </select> */}
 
                         <select
                               name="sort"

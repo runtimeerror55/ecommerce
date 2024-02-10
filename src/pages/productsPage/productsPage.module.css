@@ -29,7 +29,8 @@
       display: none;
 }
 
-select {
+select,
+.filter {
       font-weight: bold;
       font-size: 15px;
       background-color: white;
@@ -42,6 +43,11 @@ select {
       margin: 5px;
       border: 1px solid black;
       text-align: center;
+}
+
+.filter {
+      display: flex;
+      gap: 3px;
 }
 
 option {
@@ -235,7 +241,8 @@ option {
       .product-image-container {
             min-width: 120px;
       }
-      select {
+      select,
+      .filter {
             padding-left: 8px;
             padding-right: 8px;
             padding-top: 5px;

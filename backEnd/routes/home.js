@@ -5,12 +5,18 @@ const ProductModel = require("../models/product");
 router.route("/").get(async (request, response) => {
       try {
             const populateFilersOptions = (filters, products) => {
+                  filters.maxPrice = 0;
                   for (let filter of Object.keys(filters)) {
                         let newSet = new Set();
                         for (let product of products) {
                               newSet.add(product[filter]);
+                              if (filters.maxPrice < +product.price) {
+                                    filters.maxPrice = product.price;
+                              }
                         }
-                        filters[filter].push(...newSet);
+                        if (filter !== "maxPrice") {
+                              filters[filter].push(...newSet);
+                        }
                   }
             };
             let allFilters = {
@@ -32,6 +38,10 @@ router.route("/").get(async (request, response) => {
                         filters = value;
                   } else if (key !== "sort") {
                         if (key === "price") {
+                              if (+value === 0) {
+                                    continue;
+                              }
+
                               finalQuery.price = { $lte: +value };
                         } else {
                               if (key === "search") {
@@ -123,7 +133,6 @@ router.route("/").get(async (request, response) => {
                               products: result[0].products,
                               count: result[0]?.totalCount[0]?.count || 0,
                         };
-                        console.log(result[0].totalCount);
                   }
             } else {
                   if (filters === "true") {
