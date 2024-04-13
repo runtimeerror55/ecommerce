@@ -1,5 +1,4 @@
 import styles from "../cartPage/CartPage.module.css";
-import laptop from "../../assests/laptop.jpg";
 import { Link } from "react-router-dom";
 import { ButtonWithActionAndLoader } from "../../components/buttons/buttonWithActionAndLoader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

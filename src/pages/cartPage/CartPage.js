@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAsyncError, useAsyncValue, useLoaderData } from "react-router-dom";
 import styles from "../cartPage/CartPage.module.css";
-import laptop from "../../assests/laptop.jpg";
 import CartProduct from "./CartProduct";
 import CartPriceDetails from "./CartPriceDetails";
 
