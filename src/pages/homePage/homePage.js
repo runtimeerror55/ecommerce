@@ -105,8 +105,8 @@ const HomePage = () => {
                         <div className={styles.type}>
                               <b className={styles["type-heading"]}>Address</b>
                               <div>
-                                    road no 3, venkateshwara colony<br></br>
-                                    hyderabad<br></br>
+                                    5th street, lakers colony<br></br>
+                                    mumbai<br></br>
                                     040-99999999
                               </div>
                         </div>
