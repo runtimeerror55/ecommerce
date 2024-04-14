@@ -1,6 +1,6 @@
 import { redirect } from "react-router-dom";
 import { getToken } from "../utilities/utilities";
-let backEndUrl = "https://ecommerce-backend-ten-mauve.vercel.app/";
+let backEndUrl = "https://ecommerce-backend-eta-seven.vercel.app/";
 // backEndUrl = "http://localhost:3000/";
 const actions = async ({ request, params }) => {
       let url = new URL(request.url);

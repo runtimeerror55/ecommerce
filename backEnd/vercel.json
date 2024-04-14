@@ -15,7 +15,7 @@
                         },
                         {
                               "key": "Access-Control-Allow-Origin",
-                              "value": "https://ecommerce-fawn-pi-63.vercel.app"
+                              "value": "https://ecommerce-frontend-one-tawny.vercel.app"
                         },
                         {
                               "key": "Access-Control-Allow-Methods",
