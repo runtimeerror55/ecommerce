@@ -66,7 +66,7 @@ const OrderSummary = ({ cartProductsData, addressesLength }) => {
             }
 
             const result = await axios.post(
-                  "https://ecommerce-frontend-one-tawny.vercel.app/payment/orders",
+                  "https://ecommerce-backend-eta-seven.vercel.app/payment/orders",
                   {
                         totalPrice,
                   }
