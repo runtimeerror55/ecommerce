@@ -68,6 +68,7 @@ const OrderSummaryPage = () => {
                         <section className={styles["order-summary-section"]}>
                               <OrderSummary
                                     cartProductsData={cartProductsData}
+                                    addressesLength={addressesData.length}
                               ></OrderSummary>
                         </section>
                         {showAddressOverlay ? (

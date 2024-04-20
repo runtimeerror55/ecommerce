@@ -1,12 +1,13 @@
 import { Form, useNavigate, useFetcher } from "react-router-dom";
 import styles from "./orderSummaryPage.module.css";
 import { ButtonWithActionAndLoader } from "../../components/buttons/buttonWithActionAndLoader";
-import { loadScript } from "../../utilities/utilities";
+import { loadScript, toastOptions } from "../../utilities/utilities";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Bars } from "react-loader-spinner";
+import { toast } from "react-toastify";
 
-const OrderSummary = ({ cartProductsData }) => {
+const OrderSummary = ({ cartProductsData, addressesLength }) => {
       const navigate = useNavigate();
       const [showOrderLoader, setShowOrderLoader] = useState(false);
       const [canCancel, setCanCancel] = useState(true);
@@ -195,6 +196,13 @@ const OrderSummary = ({ cartProductsData }) => {
                               <button
                                     className={styles["checkout-button"]}
                                     onClick={() => {
+                                          if (addressesLength === 0) {
+                                                toast.error(
+                                                      "add address to order",
+                                                      toastOptions
+                                                );
+                                                return;
+                                          }
                                           setShowOrderLoader(true);
                                           displayRazorpay();
                                     }}
