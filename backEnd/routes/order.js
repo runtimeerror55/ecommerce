@@ -107,7 +107,6 @@ router.route("/account/orders/:orderId").get(async (request, response) => {
                   .json({ status: "error", message: error.message });
       }
 });
-
 router.route("/payment/orders").post(async (req, res) => {
       try {
             const { totalPrice } = req.body;
