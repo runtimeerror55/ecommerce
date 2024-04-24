@@ -1,8 +1,8 @@
-import { Form, redirect } from "react-router-dom";
+import { Form } from "react-router-dom";
 import styles from "./newAddressPage.module.css";
-const AddressPage = ({ type }) => {
+const AddressPage = ({ typeOne }) => {
       let action = "";
-      type = "new";
+      let type = "new";
       if (type === "edit") {
             action = "/account/addresses/id";
       } else if (type === "new") {

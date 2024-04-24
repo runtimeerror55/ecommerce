@@ -168,7 +168,6 @@ option {
 .next {
       padding: 4px;
       border-radius: 4px;
-      border: 1px;
       color: #4d4d4d;
       border: 1px solid #d9d9d9;
       display: flex;
@@ -258,7 +257,6 @@ option {
       .info {
             padding: 2px;
             margin: 2px;
-            display: inline-block;
             border: 2px solid lightblue;
             height: fit-content;
             display: inline-flex;

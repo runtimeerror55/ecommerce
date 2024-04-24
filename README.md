@@ -31,17 +31,20 @@
 </ul>
 
 <h3>Lannguages and tools used:</h3>
+
 <ul>
   <li>html</li>
+  <li>css modules</li>
   <li>javscript</li>
-  <li>css</li>
   <li>react</li>
+  <li>react-loader-spinner</li>
+  <li>react-router</li>
+  <li>react-toastify</li>
+  <li>fontawesome</li>
   <li>express</li>
+  <li>mongoDb</li>
   <li>mongoose</li>
   <li>bcrypt</li>
   <li>jsonwebtoken</li>
-  <li>react-jwt</li>
-  <li>react-loader-spinner</li>
-  <li>react-router-dom</li>
-  <li>react-toastify</li>
+  <li>vercel</li>
 </ul>
