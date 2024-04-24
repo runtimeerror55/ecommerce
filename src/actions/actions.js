@@ -97,7 +97,7 @@ const addAddress = async (request) => {
       }
 };
 
-const placeOrder = async (request) => {
+const placeOrder = async (request, params) => {
       try {
             const body = await request.json();
 
