@@ -50,12 +50,16 @@ export const Pagination = ({
                         onClick={() => {
                               pageChangeClickHandler("previous");
                         }}
+                        tabIndex={-1}
+                        onKeyDown={() => {}}
                   >
                         <FontAwesomeIcon icon={faArrowLeft}></FontAwesomeIcon>
                   </div>
                   <div
                         className={classes["page-numbers"]}
                         onClick={filterChangeHandler}
+                        tabIndex={-1}
+                        onKeyDown={() => {}}
                   >
                         {(function () {
                               let newArray = [];
@@ -121,6 +125,8 @@ export const Pagination = ({
                         onClick={() => {
                               pageChangeClickHandler("next");
                         }}
+                        tabIndex={-1}
+                        onKeyDown={() => {}}
                   >
                         <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
                   </div>
