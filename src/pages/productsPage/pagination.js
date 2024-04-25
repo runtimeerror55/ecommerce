@@ -50,7 +50,7 @@ export const Pagination = ({
                         onClick={() => {
                               pageChangeClickHandler("previous");
                         }}
-                        tabIndex={-1}
+                        tabIndex={0}
                         onKeyDown={() => {}}
                   >
                         <FontAwesomeIcon icon={faArrowLeft}></FontAwesomeIcon>
@@ -58,7 +58,7 @@ export const Pagination = ({
                   <div
                         className={classes["page-numbers"]}
                         onClick={filterChangeHandler}
-                        tabIndex={-1}
+                        tabIndex={0}
                         onKeyDown={() => {}}
                   >
                         {(function () {
@@ -125,7 +125,7 @@ export const Pagination = ({
                         onClick={() => {
                               pageChangeClickHandler("next");
                         }}
-                        tabIndex={-1}
+                        tabIndex={0}
                         onKeyDown={() => {}}
                   >
                         <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
